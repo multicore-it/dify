@@ -1,0 +1,228 @@
+app:
+  description: 회의록검색기
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 회의록검색기
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/cohere:0.0.8@1456818eb78f25c1a25e91809cecbd78e5523d39868dcb78607e625913b5e4fe
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1755229908185-source-1755229923505-target
+      source: '1755229908185'
+      sourceHandle: source
+      target: '1755229923505'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1755229923505-source-llm-target
+      source: '1755229923505'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables: []
+      height: 54
+      id: '1755229908185'
+      position:
+        x: 30
+        y: 252
+      positionAbsolute:
+        x: 30
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1755229923505'
+          - result
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 6c5b5ba9-1972-4001-bc74-f542c64548ed
+          role: system
+          text: "# 역할: 회의록 요약 및 출처 정보 추출 전문가\n\n# 입력 데이터\n{{#context#}} (여기에 검색 결과\
+            \ 내용과 함께 파일 제목, 일시, 장소, 참석자 등 메타데이터가 포함됩니다.)\n\n# 지시사항\n1. 주어진 입력 데이터에\
+            \ 여러 개의 회의록이 포함되어 있다면, 각 회의록의 내용을 독립적으로 요약하고 출처 정보를 명확히 분리하여 보여주세요.\n\
+            2. 각 회의록의 핵심 내용을 간결하고 명확하게 요약하세요.\n3. 요약과 함께, 원본 문서의 출처 정보(회의록 제목, 일시,\
+            \ 장소, 참석자)를 정확히 추출하세요.\n4. 만약 특정 정보가 입력 데이터에 없을 경우, '정보 없음'이라고 표기하세요.\
+            \ 절대로 없는 내용을 추론하거나 지어내지 마세요.\n5. 아래의 출력 형식에 맞춰 답변을 생성해야 합니다.\n\n# 출력 형식\
+            \ \n\n[첫 번째 회의록 제목]\n*회의록 요약: [여기에 핵심 요약 내용] \n*회의록 제목: [여기에 제목] \n*일시:\
+            \ [여기에 일시] \n*장소: [여기에 장소] \n*참석자: [여기에 참석자]\n\n[두 번째 회의록 제목]\n*회의록 요약:\
+            \ [여기에 핵심 요약 내용] \n*회의록 제목: [여기에 제목] \n*일시: [여기에 일시] \n*장소: [여기에 장소] \n\
+            *참석자: [여기에 참석자]"
+        selected: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 639.2436436618516
+        y: 252
+      positionAbsolute:
+        x: 639.2436436618516
+        y: 252
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 답변
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 942
+        y: 252
+      positionAbsolute:
+        x: 942
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - 2wCyG0wgt/ViMSV+CmfA9O1UFmPuOqNNNeNLRgiZT8rsNSWr1ECIbwmvC1P+hgF6
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: rerank-english-v3.0
+            provider: langgenius/cohere/cohere
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 지식 검색
+        type: knowledge-retrieval
+      height: 92
+      id: '1755229923505'
+      position:
+        x: 335.2436436618516
+        y: 252
+      positionAbsolute:
+        x: 335.2436436618516
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 440.58390111644394
+      y: 194.68421194110294
+      zoom: 0.8040888484979245

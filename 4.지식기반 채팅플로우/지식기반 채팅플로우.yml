@@ -1,0 +1,568 @@
+app:
+  description: 지식기반 채팅플로우 개발
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 지식기반 채팅플로우
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/cohere:0.0.8@1456818eb78f25c1a25e91809cecbd78e5523d39868dcb78607e625913b5e4fe
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1754565595428-source-1754565764318-target
+      source: '1754565595428'
+      sourceHandle: source
+      target: '1754565764318'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1754565764318-1-1754635895688-target
+      source: '1754565764318'
+      sourceHandle: '1'
+      target: '1754635895688'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1754565764318-2-1754637433908-target
+      source: '1754565764318'
+      sourceHandle: '2'
+      target: '1754637433908'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1754565764318-1754566503440-1754637448274-target
+      source: '1754565764318'
+      sourceHandle: '1754566503440'
+      target: '1754637448274'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1754635895688-source-1754638199566-target
+      source: '1754635895688'
+      sourceHandle: source
+      target: '1754638199566'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1754637433908-source-1754638221090-target
+      source: '1754637433908'
+      sourceHandle: source
+      target: '1754638221090'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1754637448274-source-1754638228453-target
+      source: '1754637448274'
+      sourceHandle: source
+      target: '1754638228453'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1754638199566-source-1754638706819-target
+      source: '1754638199566'
+      sourceHandle: source
+      target: '1754638706819'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1754638221090-source-1754638731614-target
+      source: '1754638221090'
+      sourceHandle: source
+      target: '1754638731614'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1754638228453-source-1754638748962-target
+      source: '1754638228453'
+      sourceHandle: source
+      target: '1754638748962'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1754565764318-1754577532484-1754638773078-target
+      source: '1754565764318'
+      sourceHandle: '1754577532484'
+      target: '1754638773078'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables: []
+      height: 54
+      id: '1754565595428'
+      position:
+        x: 30
+        y: 348
+      positionAbsolute:
+        x: 30
+        y: 348
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        classes:
+        - id: '1'
+          name: '검색 질문 (예: 내 검색기록이 자꾸 노출돼요)'
+        - id: '2'
+          name: '이메일 질문 (예: 이메일 초안을 작성해줘.)'
+        - id: '1754566503440'
+          name: '회원 질문 (예: 회원 가입 방법을 알려줘.)'
+        - id: '1754577532484'
+          name: 기타
+        desc: ''
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1754565595428'
+        - sys.query
+        selected: false
+        title: 질문 분류기
+        topics: []
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 296
+      id: '1754565764318'
+      position:
+        x: 334
+        y: 348
+      positionAbsolute:
+        x: 334
+        y: 348
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - TzGMnt+GSzZbzS7wpCkREl1b9FGg6O0lqk5lUnuP+X2XHKbKnBqhuISlSW5EOniQ
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: rerank-english-v3.0
+            provider: langgenius/cohere/cohere
+          top_k: 4
+        query_variable_selector:
+        - '1754565764318'
+        - class_name
+        retrieval_mode: multiple
+        selected: false
+        title: 지식 검색(검색)
+        type: knowledge-retrieval
+      height: 92
+      id: '1754635895688'
+      position:
+        x: 638
+        y: 348
+      positionAbsolute:
+        x: 638
+        y: 348
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - 88+GfOJ52iT1r741YlE8+AwWQKmjc3p/Aa/yb8oXrKR9LzGMavz7C2BAVPibopMk
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: rerank-english-v3.0
+            provider: langgenius/cohere/cohere
+          top_k: 4
+        query_variable_selector:
+        - '1754565764318'
+        - class_name
+        retrieval_mode: multiple
+        selected: false
+        title: 지식 검색(메일)
+        type: knowledge-retrieval
+      height: 92
+      id: '1754637433908'
+      position:
+        x: 638
+        y: 492
+      positionAbsolute:
+        x: 638
+        y: 492
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - GZj8CQTCOelFQZ81CkJdTdNXdawu4F/JxHUUUXjxyFUR93Mcd2S2ny4+6mdNonvK
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: rerank-english-v3.0
+            provider: langgenius/cohere/cohere
+          top_k: 4
+        query_variable_selector:
+        - '1754565764318'
+        - class_name
+        retrieval_mode: multiple
+        selected: false
+        title: 지식 검색(회원)
+        type: knowledge-retrieval
+      height: 92
+      id: '1754637448274'
+      position:
+        x: 638
+        y: 636
+      positionAbsolute:
+        x: 638
+        y: 636
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1754635895688'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 10105f82-942a-4d73-936f-568067138386
+          role: system
+          text: '#컨텍스트
+
+            {{#context#}}
+
+            #지침
+
+            *컨텍스트를 참고해서 답변하세요
+
+            *컨텍스트에 없는 내용은 모른다고 답변하세요
+
+            *질문에 확신이 없는 경우, 명확하게 질문해 달라고 요청하세요
+
+            *정보의 출처를 언급하지 마세요.'
+        selected: false
+        title: LLM(검색)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1754638199566'
+      position:
+        x: 942
+        y: 348
+      positionAbsolute:
+        x: 942
+        y: 348
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1754637433908'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 79e110a9-bb2d-4c0f-9fa6-a2f7c3eec322
+          role: system
+          text: '#컨텍스트
+
+            {{#context#}}
+
+            #지침
+
+            *컨텍스트를 참고해서 답변하세요
+
+            *컨텍스트에 없는 내용은 모른다고 답변하세요
+
+            *질문에 확신이 없는 경우, 명확하게 질문해 달라고 요청하세요
+
+            *정보의 출처를 언급하지 마세요.'
+        selected: false
+        title: LLM(메일)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1754638221090'
+      position:
+        x: 942
+        y: 492
+      positionAbsolute:
+        x: 942
+        y: 492
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1754637448274'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 1c14841d-2e8a-4d01-8963-bd83b0511d5c
+          role: system
+          text: '#컨텍스트
+
+            {{#context#}}
+
+            #지침
+
+            *컨텍스트를 참고해서 답변하세요
+
+            *컨텍스트에 없는 내용은 모른다고 답변하세요
+
+            *질문에 확신이 없는 경우, 명확하게 질문해 달라고 요청하세요
+
+            *정보의 출처를 언급하지 마세요.'
+        selected: false
+        title: LLM(회원)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1754638228453'
+      position:
+        x: 942
+        y: 636
+      positionAbsolute:
+        x: 942
+        y: 636
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1754638199566.text#}}'
+        desc: ''
+        selected: false
+        title: 답변(검색)
+        type: answer
+        variables: []
+      height: 104
+      id: '1754638706819'
+      position:
+        x: 1246
+        y: 348
+      positionAbsolute:
+        x: 1246
+        y: 348
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1754638221090.text#}}'
+        desc: ''
+        selected: false
+        title: 답변(메일)
+        type: answer
+        variables: []
+      height: 104
+      id: '1754638731614'
+      position:
+        x: 1246
+        y: 492
+      positionAbsolute:
+        x: 1246
+        y: 492
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1754638228453.text#}}'
+        desc: ''
+        selected: false
+        title: 답변(회원)
+        type: answer
+        variables: []
+      height: 104
+      id: '1754638748962'
+      position:
+        x: 1246
+        y: 636
+      positionAbsolute:
+        x: 1246
+        y: 636
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: 위 질문에 대한 답변이 불가능합니다.
+        desc: ''
+        selected: false
+        title: 답변(기타)
+        type: answer
+        variables: []
+      height: 102
+      id: '1754638773078'
+      position:
+        x: 638
+        y: 766.5714285714286
+      positionAbsolute:
+        x: 638
+        y: 766.5714285714286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 47.00645525483924
+      y: -6.713127766572029
+      zoom: 0.8040888484979245

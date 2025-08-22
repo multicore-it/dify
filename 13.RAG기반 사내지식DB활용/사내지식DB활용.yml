@@ -1,0 +1,402 @@
+app:
+  description: 제품명과 고객 문의사항을 입력하면 사내지식DB와 고객문의DB를 참조해서 답변을 자동으로 생성하는 에이전트
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 사내지식DB활용
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/cohere:0.0.8@1456818eb78f25c1a25e91809cecbd78e5523d39868dcb78607e625913b5e4fe
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: template-transform
+      id: 1750728476774-source-1750736019368-target
+      source: '1750728476774'
+      sourceHandle: source
+      target: '1750736019368'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: knowledge-retrieval
+      id: 1750736019368-source-1750735878153-target
+      source: '1750736019368'
+      sourceHandle: source
+      target: '1750735878153'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: template-transform
+      id: 1750729115487-source-1750749203446-target
+      source: '1750729115487'
+      sourceHandle: source
+      target: '1750749203446'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: template-transform
+      id: 1750735878153-source-1750749203446-target
+      source: '1750735878153'
+      sourceHandle: source
+      target: '1750749203446'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: llm
+      id: 1750749203446-source-llm-target
+      source: '1750749203446'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: knowledge-retrieval
+      id: 1750736019368-source-1750729115487-target
+      source: '1750736019368'
+      sourceHandle: source
+      target: '1750729115487'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables:
+        - label: 제품명
+          max_length: 48
+          options:
+          - 고성능 플랫폼 Ultra8
+          - 네오 워치 Pro
+          - 네오 키보드 Max8
+          - 무선 카메라 Z
+          - 에코 글래스 Lite1
+          - 에코 글래스 Pro2
+          - 에코 센서 Go
+          - 에코 솔루션 Plus2
+          - 울트라 스피커 Z10
+          - 프로 충전기 Z
+          required: true
+          type: select
+          variable: product_name
+      height: 90
+      id: '1750728476774'
+      position:
+        x: 30
+        y: 252
+      positionAbsolute:
+        x: 30
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1750749203446'
+          - output
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a80fed7a-2d68-4706-8e8e-f934ce7ffc1d
+          role: system
+          text: "# 역할:\n당신은 NEXA Tech의 유능하고 친절한 고객 서비스 전문가입니다. 당신의 임무는 두 개의 내부 데이터베이스를\
+            \ 교차 검증하여 고객의 문의에 대해 가장 정확하고 도움이 되는 답변을 제공하는 것입니다.\n\n# 중요 원칙: \n당신의 답변은\
+            \ **오직 아래 '참고 자료'에 제공된 내용에만 근거해야 합니다.** 당신의 사전 지식이나 외부 정보를 절대 사용해서는 안\
+            \ 됩니다.\n\n#참고자료\n### 내부지식DB 검색 결과\n{{#context#}}\n\n# 고객 문의 정보:\n- 문의\
+            \ 제품명: '{{#1750728476774.product_name#}}'\n- 고객 문의사항: '{{#sys.query#}}'\n\
+            \n# 지시사항:\n1.  먼저, '고객 문의 정보'를 명확히 파악합니다.\n2.  다음으로,  '참고 자료'에 고객의 문의사항을\
+            \ 해결할 수 있는 충분한 정보가 있는지 확인합니다.\n3.  **[정보가 충분할 경우]** '내부지식DB'의 실제 해결 사례를\
+            \ 종합하여, 고객이 쉽게 이해하고 따라 할 수 있는 최적의 해결 방안을 구성합니다. 그 후, 아래 '답변 성공 시 형식'에\
+            \ 맞춰 전문적이고 친절한 톤으로 답변 메일을 작성합니다.\n4.  **[정보가 불충분할 경우]** 만약 두 '참고 자료'를\
+            \ 모두 확인했음에도 명확한 해결책을 찾을 수 없다면, 절대 추측하여 답변하지 않습니다. 대신, 아래 '답변 불가 시 형식'에\
+            \ 맞춰 정중하게 고객센터 문의를 안내하는 답변을 작성합니다.\n\n# 답변 형식:\n### 답변 성공 시 형식 (고객센터 답변\
+            \ 메일)\n제목: [NEXA Tech] 문의하신 '{{#1750728476774.product_name#}}' 제품에 대해\
+            \ 답변드립니다.\n\n안녕하세요, 고객님.\nNEXA Tech 고객 지원팀입니다.\n\n문의주신 '{{#1750728476774.product_name#}}'\
+            \ 제품의 '{{#sys.query#}}' 문제에 대해 깊이 공감하며, 확인된 내용을 바탕으로 해결 방안을 안내해 드립니다.\n\
+            \n[여기에 문제 원인 및 분석 내용을 간결하게 작성]\n\n아래의 단계를 순서대로 진행해 보시는 것을 권장합니다.\n\n[여기에\
+            \ 해결 방안을 단계별로 명확하게 작성, 예: 1. OOO 확인, 2. XXX 설정 변경]\n\n[여기에 추가적으로 도움이 될\
+            \ 만한 팁이나 주의사항 작성]\n\n안내해 드린 방법으로 문제가 해결되기를 바랍니다. 만약 위 방법으로도 해결되지 않거나 다른\
+            \ 궁금한 점이 있으시면, 언제든지 이 메일로 회신 주시거나 저희 고객센터(1588-XXXX)로 연락 주시기 바랍니다.\n\n\
+            감사합니다.\nNEXA Tech 고객 지원팀 드림.\n\n---\n\n### 답변 불가 시 형식 (고객센터 문의 안내 메일)\n\
+            제목: [NEXA Tech] 문의하신 '{{#1750728476774.product_name#}}' 제품에 대해 안내해 드립니다.\n\
+            \n안녕하세요, 고객님.\nNEXA Tech 고객 지원팀입니다.\n\n문의주신 '{{#1750728476774.product_name#}}'\
+            \ 제품의 '{{#sys.query#}}' 문제에 대해 확인해 보았습니다.\n\n내부 자료를 통해 고객님의 문제를 해결해 드리고자\
+            \ 하였으나, 정확한 진단을 위해서는 몇 가지 추가 정보 확인이 필요하거나 전문가의 상세한 상담이 필요할 것으로 보입니다.\n\
+            \n번거로우시겠지만 저희 고객센터(1588-XXXX)로 연락 주시면, 담당자가 신속하고 상세하게 상담을 도와드리겠습니다.\n\n\
+            도움을 드리지 못해 죄송한 마음이며, 고객님의 문제가 조속히 해결될 수 있도록 최선을 다하겠습니다.\n\n감사합니다.\nNEXA\
+            \ Tech 고객 지원팀 드림."
+        - id: 1073ecec-3172-41b9-8337-a32db76de92e
+          role: user
+          text: ''
+        selected: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 1241.7142857142856
+        y: 252
+      positionAbsolute:
+        x: 1241.7142857142856
+        y: 252
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: 답변
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 1550
+        y: 252
+      positionAbsolute:
+        x: 1550
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - zIrKIdjUxwvBT7hlm60uHYhxOldS80bAQSs5t1hZBrWicP+Dt6e/1icmCChdhZEU
+        desc: ''
+        metadata_filtering_conditions:
+          conditions: []
+          logical_operator: and
+        metadata_filtering_mode: manual
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: rerank-english-v3.0
+            provider: langgenius/cohere/cohere
+          score_threshold: null
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: text-embedding-3-large
+              embedding_provider_name: langgenius/openai/openai
+              vector_weight: 0.7
+        query_variable_selector:
+        - '1750736019368'
+        - output
+        retrieval_mode: multiple
+        selected: false
+        title: 사내지식DB
+        type: knowledge-retrieval
+      height: 92
+      id: '1750729115487'
+      position:
+        x: 638
+        y: 252
+      positionAbsolute:
+        x: 638
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - OgL5eb/A88Z+v2Ja6iZ7X3/MCF/xYplJEMoMAq1AlUcwdHwCDd+ZBduvNPydyTM5
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: rerank-english-v3.0
+            provider: langgenius/cohere/cohere
+          top_k: 4
+        query_variable_selector:
+        - '1750736019368'
+        - output
+        retrieval_mode: multiple
+        selected: false
+        title: 고객문의DB
+        type: knowledge-retrieval
+      height: 92
+      id: '1750735878153'
+      position:
+        x: 638
+        y: 384
+      positionAbsolute:
+        x: 638
+        y: 384
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: false
+        template: '{{ product_name }}, {{ query }}'
+        title: 템플릿
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1750728476774'
+          - product_name
+          variable: product_name
+        - value_selector:
+          - sys
+          - query
+          variable: query
+      height: 54
+      id: '1750736019368'
+      position:
+        x: 334
+        y: 252
+      positionAbsolute:
+        x: 334
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: false
+        template: '{{arg1}}, {{arg2}}'
+        title: 템플릿(지식DB)
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1750735878153'
+          - result
+          variable: arg1
+        - value_selector:
+          - '1750729115487'
+          - result
+          variable: arg2
+      height: 54
+      id: '1750749203446'
+      position:
+        x: 942
+        y: 252
+      positionAbsolute:
+        x: 942
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -44
+      y: 129.00000000000006
+      zoom: 0.7

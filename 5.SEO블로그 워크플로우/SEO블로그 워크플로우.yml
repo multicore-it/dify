@@ -1,0 +1,799 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: SEO블로그 워크플로우
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/google:0.0.9@d360bbc433f39be1b11909cb9c32e6be4a17ea06af083f9e1c7613bb802bf517
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: if-else
+      id: 1711529368293-1711540040432
+      selected: false
+      source: '1711529368293'
+      sourceHandle: source
+      target: '1711540040432'
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: template-transform
+        targetType: end
+      id: 1711541379111-1711541407063
+      selected: false
+      source: '1711541379111'
+      sourceHandle: source
+      target: '1711541407063'
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: if-else
+        targetType: llm
+      id: 1711540040432-1711540280162
+      selected: false
+      source: '1711540040432'
+      sourceHandle: 'false'
+      target: '1711540280162'
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1754784217624-source-1711540113584-target
+      source: '1754784217624'
+      sourceHandle: source
+      target: '1711540113584'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 1711540280162-source-1754784217624-target
+      source: '1711540280162'
+      sourceHandle: source
+      target: '1754784217624'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1711540040432-true-1754784217624-target
+      source: '1711540040432'
+      sourceHandle: 'true'
+      target: '1754784217624'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1711541242630-source-1711541250877-target
+      source: '1711541242630'
+      sourceHandle: source
+      target: '1711541250877'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1711541250877-source-1754789913355-target
+      source: '1711541250877'
+      sourceHandle: source
+      target: '1754789913355'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1711540113584-source-1711541242630-target
+      source: '1711540113584'
+      sourceHandle: source
+      target: '1711541242630'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: template-transform
+      id: 1754789913355-source-1711541379111-target
+      source: '1754789913355'
+      sourceHandle: source
+      target: '1711541379111'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: 키워드
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: keyword
+        - label: 타이틀
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: title
+        - label: 대상독자
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: audience
+        - label: 어조/문체
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: tone
+      dragging: false
+      height: 168
+      id: '1711529368293'
+      position:
+        x: 30
+        y: 284
+      positionAbsolute:
+        x: 30
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: '1711540046932'
+            value: ''
+            variable_selector:
+            - '1711529368293'
+            - title
+          id: 'true'
+          logical_operator: and
+        conditions:
+        - comparison_operator: empty
+          id: '1711540046932'
+          value: ''
+          variable_selector:
+          - '1711529368293'
+          - title
+        desc: ''
+        logical_operator: and
+        selected: false
+        title: IF/ELSE
+        type: if-else
+      dragging: false
+      height: 126
+      id: '1711540040432'
+      position:
+        x: 364
+        y: 284
+      positionAbsolute:
+        x: 364
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4915e80a-2e79-442f-b120-fd2e009ad884
+          role: system
+          text: "#역할:\n당신은 SEO 전문가이자 주제 전문가입니다. \n\n#지침:\n사용자가 제공한 {{#1711529368293.title#}}의\
+            \ 맥락을 바탕으로 SEO에 최적화된 블로그 제목을 생성합니다."
+        - id: 50d16251-fdea-4bc5-9427-bbff35b41d6f
+          role: user
+          text: '#지침:
+
+            *다음은 제가 작성할 기사의 주제인 {{#1711529368293.keyword#}}에 대한 상위 검색 결과입니다.
+
+            *이 결과들이 높은 순위를 차지할 수 있었던 SEO 원칙들을 분석하고 설명해 주세요.
+
+
+            #상위검색 결과:
+
+            {{#1754784217624.text#}}
+
+
+            '
+        - id: 08fd1dcc-6e03-482c-96ae-390cd5399065
+          role: assistant
+          text: '{{#1711529368293.keyword#}}에 대한 SEO 친화적인 기사 제목을 만들려면, 상위권에 오른 글들이
+            어떤 특징을 가졌는지 먼저 분석해야 합니다. 이들이 높은 순위를 차지할 수 있었던 성공 비결은 주로 다음과 같습니다.
+
+            1. 핵심 키워드를 제목에 명확히 포함하기
+
+            사용자가 무엇을 검색했는지 검색 엔진이 바로 알 수 있도록, 키워드를 제목에 직접적으로 넣거나 그와 아주 비슷한 표현을 사용해야
+            합니다.
+
+            2. 짧고 핵심만 담은 제목 만들기
+
+            불필요한 수식어를 빼고 간결하게 작성하면, 사용자들이 제목만으로도 글의 내용을 쉽게 파악할 수 있어 클릭률이 높아집니다.
+
+            3. 궁금증을 해소해 줄 내용을 암시하기
+
+            제목에 ''정의'', ''설명'' 같은 단어를 넣어 사용자가 얻고자 하는 정보가 이 글에 담겨있음을 보여주는 것이 좋습니다.
+            {{#1711529368293.keyword#}}를 검색하는 사람들은 대부분 해당 개념에 대한 궁금증을 가지고 있기 때문입니다.
+
+            4. 다양한 관점에서 접근하기
+
+            똑같은 주제라도 ''원리'', ''활용법'', ''장단점'' 등 다양한 관점을 제시하는 제목을 만들면, 더 폭넓은 독자층의 관심을
+            끌 수 있습니다.
+
+            '
+        - id: 60dc7f43-9489-4c75-9cb5-81d23c44a1a5
+          role: user
+          text: '#지침:
+
+            *앞서 분석한 원칙들을 바탕으로, {{#1711529368293.keyword#}}에 대한 SEO 제목을 만들어주세요.
+
+            *상위권 제목들의 특징을 살리되, 단순히 복사하는 대신 더 나은 제목을 제시해 주세요. ''마스터하기'', ''종합적인'',
+            ''발견하기'', ''밝히다'' 같은 단어나 ''-하기'' 형태의 명사형은 사용하지 마세요.
+
+            *오직 능동태와 현재 시제로만 작성해 주세요. 따옴표나 콜론 같은 특수 기호 없이 제목만 알려주세요.
+
+            *제목은 1개만 생성합니다.'
+        selected: true
+        title: LLM(제목생성)
+        type: llm
+        variables:
+        - value_selector:
+          - '1711529368293'
+          - keyword
+          variable: keyword
+        - value_selector:
+          - '1711540832602'
+          - text
+          variable: text
+        vision:
+          enabled: false
+      dragging: false
+      height: 90
+      id: '1711540113584'
+      position:
+        x: 1256.5714285714284
+        y: 318.2857142857143
+      positionAbsolute:
+        x: 1256.5714285714284
+        y: 318.2857142857143
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 8239a958-2231-426f-9a7f-669494c769b3
+          role: system
+          text: "*지침\n1. 제목이 {{#1711529368293.keyword#}} 기사를 찾기 위한 관련성 높고 트래픽이 많은\
+            \ 검색 문구를 제공해 주세요. \n2. 특수 문자는 제외하고 문구만 반환해 주세요."
+        selected: false
+        title: LLM(구글검색문구)
+        type: llm
+        variables:
+        - value_selector:
+          - '1711529368293'
+          - title
+          variable: title
+        vision:
+          enabled: false
+      dragging: false
+      height: 90
+      id: '1711540280162'
+      position:
+        x: 648.2857142857144
+        y: 468.2857142857142
+      positionAbsolute:
+        x: 648.2857142857144
+        y: 468.2857142857142
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 0d6d2409-b50d-479a-a462-0ec16f612d7d
+          role: system
+          text: "#역할:\n당신은 SEO 전문가로서, 쉽고 실용적이며 교육적인 방식으로 글을 씁니다. 스토리텔링이나 서사적인 스타일보다는\
+            \ '어떻게 하는지', '무엇인지', '왜 중요한지'에 초점을 맞춰 정보를 전달합니다.\n\n#지침\n*대상 독자: {{#1711529368293.audience#}}\n\
+            *문체: {{#1711529368293.tone#}}\n난이도: {{#1711529368293.audience#}}에 맞게 난이도를\
+            \ 조절합니다.\n*내용: {{#1711529368293.keyword#}}{{#1711529368293.title#}}{{#1711540280162.text#}}{{#1754784217624.text#}}와\
+            \ 관련이 있어야 합니다.\n*시제 및 문법: 능동태, 현재 시제를 사용하며, '파헤치다', '심층적으로 탐구하다'와 같은 복잡한\
+            \ 표현은 피합니다.\n*구성:\n - 제목을 생성하지 않습니다.\n - 3~5문장으로 블로그를 소개합니다.\n - 전체 글은\
+            \ 500자를 넘지 않습니다.\n - 서술형으로 작성합니다."
+        selected: false
+        title: LLM(인트로생성)
+        type: llm
+        variables:
+        - value_selector:
+          - '1711529368293'
+          - audience
+          variable: audience
+        - value_selector:
+          - '1711529368293'
+          - tone
+          variable: tone
+        - value_selector:
+          - '1711540755626'
+          - text
+          variable: text
+        vision:
+          configs:
+            detail: high
+            variable_selector: []
+          enabled: false
+      dragging: false
+      height: 90
+      id: '1711541242630'
+      position:
+        x: 1256.5714285714284
+        y: 438.28571428571445
+      positionAbsolute:
+        x: 1256.5714285714284
+        y: 438.28571428571445
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 09b3adcb-665f-4cf3-87c8-44ab7a503310
+          role: system
+          text: "#역할\n당신은 SEO 전문가로서, 쉽고 실용적이며 교육적인 방식으로 글을 씁니다. 스토리텔링이나 서사적인 스타일보다는\
+            \ '어떻게 하는지', '무엇인지', '왜 중요한지'에 초점을 맞춰 정보를 전달합니다.\n\n#지침\n*대상 독자: {{#1711529368293.audience#}}\n\
+            *문체: {{#1711529368293.tone#}}\n*난이도: {{#1711529368293.audience#}}에 맞게\
+            \ 난이도를 조절합니다.\n*시제 및 문법: 능동태, 현재 시제를 사용하며, '파헤치다', '심층적으로 탐구하다'와 같은 복잡한\
+            \ 표현은 피합니다.\n*내용: {{#1711529368293.keyword#}}{{#1711529368293.title#}}{{#1711540280162.text#}}{{#1754784217624.text#}}와\
+            \ 관련이 있어야 합니다.\n*구성:\n - 이미 작성된 내용을 반복하지 않고, 같은 문장 구조를 반복하지 않아야 합니다.\n\
+            \ - 글머리 기호, 번호 목록, 단락, 굵은 글씨 등을 자유롭게 사용하여 강조합니다.\n - 각 섹션은 자연스럽게 이어지고,\
+            \ 이전 섹션의 내용을 바탕으로 다음 섹션이 전개되어야 합니다.\n - 결론, 요약, '결론적으로', '요약하자면'과 같은 표현은\
+            \ 사용하지 않습니다.\n - 제공된 참고 자료와 데이터 포인트를 추가하여 글의 가치를 높여야 합니다."
+        selected: false
+        title: LLM(본문생성)
+        type: llm
+        variables:
+        - value_selector:
+          - '1711529368293'
+          - audience
+          variable: audience
+        - value_selector:
+          - '1711529368293'
+          - tone
+          variable: tone
+        - value_selector:
+          - '1711540755626'
+          - text
+          variable: outline
+        - value_selector:
+          - '1711529368293'
+          - title
+          variable: title
+        - value_selector:
+          - '1711540113584'
+          - text
+          variable: text2
+        vision:
+          configs:
+            detail: high
+            variable_selector: []
+          enabled: false
+      dragging: false
+      height: 90
+      id: '1711541250877'
+      position:
+        x: 1256.5714285714284
+        y: 552.5714285714287
+      positionAbsolute:
+        x: 1256.5714285714284
+        y: 552.5714285714287
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: false
+        template: "# {{title}}\r\n\r\n{{intro}}\r\n\r\n{{body}}\r\n\r\n\r\n#### 키워드:\r\
+          \n{{ keyword }}"
+        title: Template
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1711540113584'
+          - text
+          value_type: string
+          variable: title
+        - value_selector:
+          - '1711541242630'
+          - text
+          value_type: string
+          variable: intro
+        - value_selector:
+          - '1711541250877'
+          - text
+          value_type: string
+          variable: body
+        - value_selector:
+          - '1754789913355'
+          - text
+          value_type: string
+          variable: keyword
+      dragging: false
+      height: 54
+      id: '1711541379111'
+      position:
+        x: 1584.0000000000007
+        y: 318.2857142857143
+      positionAbsolute:
+        x: 1584.0000000000007
+        y: 318.2857142857143
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1711541379111'
+          - output
+          variable: output
+        selected: false
+        title: End
+        type: end
+      dragging: false
+      height: 90
+      id: '1711541407063'
+      position:
+        x: 1906.5714285714284
+        y: 318.2857142857143
+      positionAbsolute:
+        x: 1906.5714285714284
+        y: 318.2857142857143
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: used for searching
+            ja_JP: used for searching
+            pt_BR: used for searching
+            zh_Hans: 用于搜索网页内容
+          label:
+            en_US: Query string
+            ja_JP: Query string
+            pt_BR: Query string
+            zh_Hans: 查询语句
+          llm_description: key words for searching
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Parameter defines the language to use for the Google search. It's
+              a two-letter language code. (e.g., en for English, es for Spanish, or
+              fr for French). Head to https://serpapi.com/google-languages for a full
+              list of supported Google languages.
+            ja_JP: Parameter defines the language to use for the Google search. It's
+              a two-letter language code. (e.g., en for English, es for Spanish, or
+              fr for French). Head to https://serpapi.com/google-languages for a full
+              list of supported Google languages.
+            pt_BR: Parameter defines the language to use for the Google search. It's
+              a two-letter language code. (e.g., en for English, es for Spanish, or
+              fr for French). Head to https://serpapi.com/google-languages for a full
+              list of supported Google languages.
+            zh_Hans: 此参数定义用于 Google 搜索的语言。它是一个两字母的语言代码。 (例如，en 代表英语，es 代表西班牙语，fr 代表法语)。请前往
+              https://serpapi.com/google-languages 查看完整的支持 Google 语言列表。
+          label:
+            en_US: Language
+            ja_JP: Language
+            pt_BR: Language
+            zh_Hans: 语言
+          llm_description: Language
+          max: null
+          min: null
+          name: hl
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Parameter defines the country to use for the Google search. It's
+              a two-letter country code. (e.g., us for the United States, uk for United
+              Kingdom, or fr for France). Head to the https://serpapi.com/google-countries
+              for a full list of supported Google countries.
+            ja_JP: Parameter defines the country to use for the Google search. It's
+              a two-letter country code. (e.g., us for the United States, uk for United
+              Kingdom, or fr for France). Head to the https://serpapi.com/google-countries
+              for a full list of supported Google countries.
+            pt_BR: Parameter defines the country to use for the Google search. It's
+              a two-letter country code. (e.g., us for the United States, uk for United
+              Kingdom, or fr for France). Head to the https://serpapi.com/google-countries
+              for a full list of supported Google countries.
+            zh_Hans: 此参数定义用于 Google 搜索的国家。它是一个两字母的国家代码。 (例如，us 代表美国，uk 代表英国，fr 代表法国)。请前往
+              https://serpapi.com/google-countries 查看完整的支持 Google 国家列表。
+          label:
+            en_US: Country
+            ja_JP: Country
+            pt_BR: Country
+            zh_Hans: 国家
+          llm_description: Country
+          max: null
+          min: null
+          name: gl
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Parameter defines from where you want the search to originate.
+              If several locations match the location requested, we'll pick the most
+              popular one. Head to the /locations.json API if you need more precise
+              control. The location and uule parameters can't be used together. It
+              is recommended to specify location at the city level in order to simulate
+              a real user’s search. If location is omitted, the search may take on
+              the location of the proxy.
+            ja_JP: Parameter defines from where you want the search to originate.
+              If several locations match the location requested, we'll pick the most
+              popular one. Head to the /locations.json API if you need more precise
+              control. The location and uule parameters can't be used together. It
+              is recommended to specify location at the city level in order to simulate
+              a real user’s search. If location is omitted, the search may take on
+              the location of the proxy.
+            pt_BR: Parameter defines from where you want the search to originate.
+              If several locations match the location requested, we'll pick the most
+              popular one. Head to the /locations.json API if you need more precise
+              control. The location and uule parameters can't be used together. It
+              is recommended to specify location at the city level in order to simulate
+              a real user’s search. If location is omitted, the search may take on
+              the location of the proxy.
+            zh_Hans: 此参数定义搜索的位置。如果有多个位置与请求的位置匹配，我们将选择最受欢迎的一个。如果需要更精确的控制，请前往 /locations.json
+              API。location 和 uule 参数不能同时使用。建议在城市级别指定位置，以模拟真实用户的搜索。如果省略位置，则搜索可能会采用代理的位置。
+          label:
+            en_US: Location
+            ja_JP: Location
+            pt_BR: Location
+            zh_Hans: 位置
+          llm_description: Location
+          max: null
+          min: null
+          name: location
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          gl: ''
+          hl: ''
+          location: ''
+          query: ''
+        provider_id: langgenius/google/google
+        provider_name: langgenius/google/google
+        provider_type: builtin
+        selected: false
+        title: GoogleSearch
+        tool_configurations: {}
+        tool_description: A tool for performing a Google SERP search and extracting
+          snippets and webpages.Input should be a search query.
+        tool_label: GoogleSearch
+        tool_name: google_search
+        tool_node_version: '2'
+        tool_parameters:
+          gl:
+            type: mixed
+            value: kr
+          hl:
+            type: mixed
+            value: ko
+          query:
+            type: mixed
+            value: '{{#1711529368293.title#}}{{#1711540280162.text#}}'
+        type: tool
+      height: 54
+      id: '1754784217624'
+      position:
+        x: 936.8571428571427
+        y: 318.2857142857143
+      positionAbsolute:
+        x: 936.8571428571427
+        y: 318.2857142857143
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 225b63bf-4113-432d-9d25-f5b463b95d09
+          role: system
+          text: "#역할:\n당신은 Google 검색 전문가입니다. 사용자로부터 받은 정보를 바탕으로 권위 있는 정보를 찾을 수 있는\
+            \ 최적의 Google 검색 문구를 생성해야 합니다.\n#지침:\n*나는 {{#1711529368293.title#}}{{#1711540280162.text#}}이라는\
+            \ 내용의 블로그를 작성하고 있습니다.\n*대상 독자는 {{#1711529368293.audience#}}입니다. \n*{{#1711540113584.text#}},\
+            \ {{#1711541242630.text#}}, {{#1711541250877.text#}} 가장 잘 설명할 수 있는 검색어를\
+            \ 생성해주세요.\n*검색어는 다섯 단어 이내여야 합니다. \n*검색어에 내가 익숙하지 않은 단어가 포함되어도 괜찮습니다. \n\
+            *오직 검색 문구만 반환해주세요. \n*따옴표나 콜론 같은 특수 기호는 포함하지 마세요.\n*검색어 개수는 5개 입니다."
+        selected: false
+        title: LLM(검색어생성)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1754789913355'
+      position:
+        x: 1256.5714285714284
+        y: 665.4285714285716
+      positionAbsolute:
+        x: 1256.5714285714284
+        y: 665.4285714285716
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -365.1516640957898
+      y: 64.38600832425402
+      zoom: 0.8040888484979245

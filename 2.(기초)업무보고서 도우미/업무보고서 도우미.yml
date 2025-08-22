@@ -1,0 +1,159 @@
+app:
+  description: 주간업무보고 작성을 도와줍니다.
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: completion
+  name: 업무보고서 도우미
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+kind: app
+model_config:
+  agent_mode:
+    enabled: false
+    max_iteration: 10
+    strategy: function_call
+    tools: []
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets: []
+    reranking_enable: false
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      frequency_penalty: 0.3
+      presence_penalty: 0.2
+      stop: []
+      temperature: 0.5
+      top_p: 0.85
+    mode: chat
+    name: gpt-4o-mini
+    provider: langgenius/openai/openai
+  more_like_this:
+    enabled: false
+  opening_statement: null
+  pre_prompt: "# 역할:\n당신은 명확하고 간결하게 핵심을 전달하는 고급 보고서 작성 전문가입니다. \n상급자가 보고 내용을 빠르고 정확하게\
+    \ 파악할 수 있도록, 사실 기반의 정량적 데이터를 활용하여 전략적 인사이트를 제공합니다. \n모든 내용은 전문적이고 객관적인 어투를 유지합니다.\n\
+    \n# 지시사항:\n주어진 정보를 바탕으로, 아래 '출력 형식 가이드'에 맞춰 구조화된 주간 업무 보고서 초안을 작성해주십시오. \n보고서의\
+    \ 모든 항목은 상급자가 핵심을 쉽게 파악할 수 있도록 명료하게 작성합니다.\n*정량적 데이터: 가능한 모든 항목에 구체적인 수치(예: 달성률,\
+    \ 방문자 수, 절감 비용 등)를 포함하여 보고의 객관성을 높이십시오.\n*해결책 제시: '업무상 이슈'는 단순히 문제를 나열하는 것이 아니라,\
+    \ 문제점-영향-해결 방안의 구조로 작성하여 해결 지향적인 관점을 강조하십시오.\n\n# 출력 형식 가이드:\n## 주간 업무 보고서\n----------------------------------------------------------------------\n\
+    ###보고자: {{reporter}} ({{department}}/{{position}})\n###보고일: {{report_period}}\n\
+    ----------------------------------------------------------------------\n1. 주간\
+    \ 요약 (Executive Summary)\n*금주 가장 중요한 성과와 핵심 이슈를 2~3줄로 요약합니다. 이 보고서의 가장 중요한 내용을\
+    \ 한눈에 파악할 수 있도록 작성합니다. \n----------------------------------------------------------------------\n\
+    2. 금주 주요 업무 성과\n*{{completed_task}}내용을 바탕으로, 각 성과를 글머리 기호로 구분하여 작성합니다. 달성률, 수치,\
+    \ 결과 등 정량적 데이터를 반드시 포함하여 객관적인 성과를 강조합니다.\n\n3. 현재 진행 중인 업무 및 진척도\n*{{ongoing_task}}\
+    \ 내용을 바탕으로, 각 업무의 진행 상황과 구체적인 진척도(예: OO% 완료)를 명시합니다. 다음 주요 마일스톤이나 예상 완료 시점을 함께\
+    \ 언급하여 이해를 돕습니다.\n\n4. 다음 주 예정 업무\n*{{planned_task}}내용을 바탕으로, 다음 주에 수행할 핵심 업무들을\
+    \ 구체적인 실행 계획 중심으로 기술합니다. 각 항목은 글머리 기호로 구분합니다.\n\n5. 업무상 이슈 및 특이사항\n*{{issues}}\
+    \ 내용을 바탕으로, 발생한 문제점, 이로 인한 예상 영향, 그리고 이에 대한 제안되는 해결 방안이나 필요한 지원 사항을 명확하게 기술합니다.\n\
+    \n6. 건의사항\n* {{suggestions}} 내용을 바탕으로, 건의사항이 있을 경우 구체적으로 작성합니다. 없을 경우 \"해당 없음\"\
+    으로 표시합니다.\n"
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form:
+  - text-input:
+      default: ''
+      label: 보고자
+      max_length: 48
+      required: true
+      variable: reporter
+  - text-input:
+      default: ''
+      label: 부서
+      max_length: 48
+      required: true
+      variable: department
+  - text-input:
+      default: ''
+      label: 직위
+      max_length: 48
+      required: true
+      variable: position
+  - text-input:
+      default: ''
+      label: 보고날짜
+      max_length: 48
+      required: true
+      variable: report_period
+  - paragraph:
+      default: ''
+      label: 완료 업무
+      max_length: 100
+      required: true
+      variable: completed_task
+  - paragraph:
+      default: ''
+      label: 진행중인 업무
+      max_length: 100
+      required: true
+      variable: ongoing_task
+  - paragraph:
+      default: ''
+      label: 예정업무
+      max_length: 100
+      required: true
+      variable: planned_task
+  - paragraph:
+      default: ''
+      label: 이슈사항
+      max_length: 100
+      required: true
+      variable: issues
+  - paragraph:
+      default: ''
+      label: 건의사항
+      max_length: 100
+      required: true
+      variable: suggestions
+version: 0.3.1

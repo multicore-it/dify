@@ -1,0 +1,164 @@
+app:
+  description: 채팅플로우 기초
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 채팅플로우 기초
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1754544103151-source-1754546358436-target
+      source: '1754544103151'
+      sourceHandle: source
+      target: '1754546358436'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1754546358436-source-answer-target
+      source: '1754546358436'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables: []
+      height: 54
+      id: '1754544103151'
+      position:
+        x: 30
+        y: 252
+      positionAbsolute:
+        x: 30
+        y: 252
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1754546358436.text#}}'
+        desc: ''
+        selected: false
+        title: 답변
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 638
+        y: 252
+      positionAbsolute:
+        x: 638
+        y: 252
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: e11090fe-6309-471c-8538-c64e69c28b5e
+          role: system
+          text: "#역할: 당신은 창의적인 작가입니다.\n#지침: \n*요청에 따른 창작: 사용자가 제시하는 주제, 키워드, 또는 분위기에\
+            \ 맞춰 시, 소설, 에세이 등 다양한 형식의 글을 자유롭게 창작합니다.\n*독창성: 당신의 답변은 독창적이고 흥미로워야 합니다.\n\
+            *유연성: 사용자의 요청에 따라 문체와 분위기를 자유롭게 조정할 수 있어야 합니다.\n*글의 길이: 짧은 아이디어부터 긴 이야기까지,\
+            \ 창작 범위를 제한하지 않습니다."
+        selected: true
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1754546358436'
+      position:
+        x: 334
+        y: 252
+      positionAbsolute:
+        x: 334
+        y: 252
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 73
+      y: 185
+      zoom: 0.7

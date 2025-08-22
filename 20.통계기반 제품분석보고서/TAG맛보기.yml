@@ -1,0 +1,663 @@
+app:
+  description: TAG맛보기
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: TAG맛보기
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: hjlarry/database:0.0.6@534bc26cf5bc4ff6b5557457452287ccc71f00eef9378784c4f43ca49954ca2f
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1755394916118-source-1755394935257-target
+      source: '1755394916118'
+      sourceHandle: source
+      target: '1755394935257'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1755394935257-source-llm-target
+      source: '1755394935257'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: llm-source-1755395008731-target
+      source: llm
+      sourceHandle: source
+      target: '1755395008731'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1755395008731-source-1755395043895-target
+      source: '1755395008731'
+      sourceHandle: source
+      target: '1755395043895'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1755395043895-source-answer-target
+      source: '1755395043895'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables: []
+      height: 54
+      id: '1755394916118'
+      position:
+        x: 30
+        y: 258
+      positionAbsolute:
+        x: 30
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 3c5784de-480e-418d-b252-0a5e86f00179
+          role: system
+          text: "# 역할\n당신은 사용자의 질문을 PostgreSQL SQL 쿼리로 변환해주는 유능한 AI 데이터 분석가입니다.\n\n\
+            # 지시사항 \n- 아래에 제공되는 '데이터베이스 스키마'를 반드시 참고하여 '변경대상 쿼리'를 수정해야 합니다. \n- 스키마에\
+            \ 존재하지 않는 컬럼은 절대로 사용해서는 안 됩니다. \n- 응답은 다른 부가적인 설명 없이 오직 SQL 쿼리만 생성해야 합니다.\
+            \ \n- 테이블과 컬럼 이름에 한글이 포함되어 있으므로, \"큰따옴표\"로 감싸서 명확하게 지정해주세요.\n- [매우 중요]\
+            \ 당신의 응답은 다른 어떤 부가적인 설명, 줄바꿈, Markdown 코드 블록(```)도 없이, 순수한 SQL 쿼리 텍스트만으로\
+            \ 구성되어야 합니다.\n\n# 변경대상 쿼리\n{{#1755394935257.text#}}\n\n# 데이터베이스 스키마\n\
+            create table public.제품별매출실적 (\n  그룹 text null,\n  제품명 text null,\n  목표매출\
+            \ double precision null,\n  실제매출 double precision null,\n  달성률 bigint\
+            \ null\n) TABLESPACE pg_default;\n\n# 생성할 SQL 쿼리:"
+        selected: false
+        title: LLM(TAG)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 638
+        y: 258
+      positionAbsolute:
+        x: 638
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1755395043895.text#}}'
+        desc: ''
+        selected: false
+        title: 답변
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 1550
+        y: 258
+      positionAbsolute:
+        x: 1550
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The user query.
+            ja_JP: The user query.
+            pt_BR: The user query.
+            zh_Hans: 用户的问题。
+          label:
+            en_US: Query string
+            ja_JP: Query string
+            pt_BR: Query string
+            zh_Hans: 查询语句
+          llm_description: The user query.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            ja_JP: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            pt_BR: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            zh_Hans: 指定哪些表用于提供给LLM作为上下文，如不指定，则使用所有表。多张表用半角逗号隔开。
+          label:
+            en_US: Tables
+            ja_JP: Tables
+            pt_BR: Tables
+            zh_Hans: 表
+          llm_description: Specify which tables schema do you want to get as model
+            context. Multi tables use comma to separate. Leave it blank if you want
+            to get all tables schema.
+          max: null
+          min: null
+          name: tables
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Choose the model.
+            ja_JP: Choose the model.
+            pt_BR: Choose the model.
+            zh_Hans: 选择模型。
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: 模型
+          llm_description: ''
+          max: null
+          min: null
+          name: model
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: llm
+          template: null
+          type: model-selector
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: secret-input
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          model: ''
+          query: ''
+          tables: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: Text to SQL
+        tool_configurations:
+          config_options:
+            type: mixed
+            value: null
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+        tool_description: supply to LLM the context of the database and the user query
+          to get a sql string.
+        tool_label: Text to SQL
+        tool_name: text2sql
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: null
+          query:
+            type: mixed
+            value: '{{#sys.query#}}'
+          tables:
+            type: mixed
+            value: 제품별매출실적
+        type: tool
+      height: 116
+      id: '1755394935257'
+      position:
+        x: 334
+        y: 258
+      positionAbsolute:
+        x: 334
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The SQL query string.
+            ja_JP: The SQL query string.
+            pt_BR: The SQL query string.
+            zh_Hans: SQL 查询语句。
+          label:
+            en_US: SQL Query
+            ja_JP: SQL Query
+            pt_BR: SQL Query
+            zh_Hans: SQL 查询语句
+          llm_description: The SQL query string.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: json
+          form: form
+          human_description:
+            en_US: Choose the output format.
+            ja_JP: Choose the output format.
+            pt_BR: Choose the output format.
+            zh_Hans: 选择输出格式。
+          label:
+            en_US: Output format
+            ja_JP: Output format
+            pt_BR: Output format
+            zh_Hans: 输出格式
+          llm_description: ''
+          max: null
+          min: null
+          name: format
+          options:
+          - icon: ''
+            label:
+              en_US: JSON
+              ja_JP: JSON
+              pt_BR: JSON
+              zh_Hans: JSON
+            value: json
+          - icon: ''
+            label:
+              en_US: CSV
+              ja_JP: CSV
+              pt_BR: CSV
+              zh_Hans: CSV
+            value: csv
+          - icon: ''
+            label:
+              en_US: YAML
+              ja_JP: YAML
+              pt_BR: YAML
+              zh_Hans: YAML
+            value: yaml
+          - icon: ''
+            label:
+              en_US: Markdown
+              ja_JP: Markdown
+              pt_BR: Markdown
+              zh_Hans: Markdown
+            value: md
+          - icon: ''
+            label:
+              en_US: Excel
+              ja_JP: Excel
+              pt_BR: Excel
+              zh_Hans: Excel
+            value: xlsx
+          - icon: ''
+            label:
+              en_US: HTML
+              ja_JP: HTML
+              pt_BR: HTML
+              zh_Hans: HTML
+            value: html
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          format: ''
+          query: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: SQL Execute
+        tool_configurations:
+          config_options:
+            type: mixed
+            value: null
+          format:
+            type: constant
+            value: md
+        tool_description: This tool is used to execute SQL in an existing database.
+        tool_label: SQL Execute
+        tool_name: sql_execute
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: ''
+          query:
+            type: mixed
+            value: '{{#llm.text#}}'
+        type: tool
+      height: 116
+      id: '1755395008731'
+      position:
+        x: 942
+        y: 258
+      positionAbsolute:
+        x: 942
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1755395008731'
+          - text
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a97b0f3e-d1d4-4060-9d2d-c3d4869ad347
+          role: system
+          text: "# 역할\n당신은 여러 데이터를 종합하여 핵심을 꿰뚫는 인사이트를 도출하고, 명확한 전략을 제시하는 유능한 시니어 프로덕트\
+            \ 매니저(Senior Product Manager)입니다.\n\n#분석 대상 데이터\n{{#context#}}\n\n# 지시사항\n\
+            *데이터가 없으면 \"데이터가 없습니다\"라는 문구를 보여주세요.\n*당신은 특정 제품에 대한 실적 데이터를 전달받았습니다.\
+            \ \n*정보를 종합적으로 분석하여  보고서를 작성해야 합니다. \n*각 항목은 구체적인 데이터를 근거로 논리적으로 서술해주세요.\n\
+            *데이터 기반으로 설명합니다.\n\n# 분석 대상 제품명\n{{#sys.query#}}"
+        selected: true
+        title: LLM(분석결과)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755395043895'
+      position:
+        x: 1246
+        y: 258
+      positionAbsolute:
+        x: 1246
+        y: 258
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 86.02999618143531
+      y: 62.85526492637882
+      zoom: 0.8040888484979245

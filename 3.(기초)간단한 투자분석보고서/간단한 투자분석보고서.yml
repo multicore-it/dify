@@ -1,0 +1,138 @@
+app:
+  description: 간단한 투자분석보고서
+  icon: 🤑
+  icon_background: '#E4FBCC'
+  mode: agent-chat
+  name: 간단한 투자분석보고서
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/yahoo:0.0.5@b0bf4aa3062c9b41ce3eaac8e4ea1987f7daef614702b4f3a11755629b35bb28
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 5
+    strategy: function_call
+    tools:
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: langgenius/yahoo/yahoo
+      provider_name: langgenius/yahoo/yahoo
+      provider_type: builtin
+      tool_label: Analytics
+      tool_name: yahoo_finance_analytics
+      tool_parameters:
+        end_date: ''
+        start_date: ''
+        symbol: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: langgenius/yahoo/yahoo
+      provider_name: langgenius/yahoo/yahoo
+      provider_type: builtin
+      tool_label: Ticker
+      tool_name: yahoo_finance_ticker
+      tool_parameters:
+        symbol: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: langgenius/yahoo/yahoo
+      provider_name: langgenius/yahoo/yahoo
+      provider_type: builtin
+      tool_label: News
+      tool_name: yahoo_finance_news
+      tool_parameters:
+        symbol: ''
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets: []
+    reranking_enable: false
+    retrieval_model: single
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: gpt-4o-mini
+    provider: langgenius/openai/openai
+  more_like_this:
+    enabled: false
+  opening_statement: 'Welcome to your personalized Investment Analysis Copilot service,
+    where we delve into the depths of stock analysis to provide you with comprehensive
+    insights. To begin our journey into the financial world, try to ask:
+
+    '
+  pre_prompt: "#역할:\n당신은 유능한 증권 애널리스트입니다. 금융 시장의 최전선에서 활동하며, 사용자가 요청하는 주식의 핵심 정보를\
+    \ 가장 빠르고 정확하게 전달하는 것이 당신의 임무입니다. 당신은 불필요한 서론이나 배경 설명 없이, 오직 필수적인 사실만을 요약하여 보고합니다.\
+    \ 속도와 효율성을 최우선으로 생각하며, 장황한 분석보다는 명확하고 간결한 정보 전달에 집중합니다.\n\n#보유 능력:\n*Ticker: 야후\
+    \ 파이낸스에서 주식의 회사명과 현재 주가를 즉시 조회합니다.\n*News: 해당 주식과 관련된 가장 최근 뉴스 헤드라인 3개를 찾아 한글로\
+    \ 번역합니다.\n*Analytics: 최신 매출액 또는 P/E 비율 중 하나를 빠르게 조회합니다.\n\n#작업 흐름\n1. 사용자가 티커\
+    \ 또는 회사명을 입력하면, 다음 순서에 따라 정보를 조회하고 요약합니다.\n2. 회사 정보 (Ticker): \"회사명\"과 현재 주가를\
+    \ 확인합니다.\n3. 최신 뉴스 (News): \"회사명\"과 관련된 가장 최근 뉴스 헤드라인 3개를 찾아 한글로 번역합니다.\n4. 분석정보(Analytics):\
+    \ P/E, PRB, EPS, Revenue, Net Income 정보를 조회합니다.\n\n#작업 방식\n1. 조회된 모든 정보를 아래와 같은\
+    \ 형식으로 요약하여 보고합니다. \n2. 최신뉴스와, 주요지표를 종합해서 애널리스트 분석자료를 만듭니다.\n3. 정보 조회가 불가능한 경우\
+    \ 해당 부분은 '확인 안됨'으로 표기하거나 생략합니다.\n\n#브리핑 형식\n*\"회사명\" 브리핑: [회사명] (현재가: [가격])\n\
+    *최신 뉴스: [헤드라인]\n*주요 지표: \n - 주가수익비율 (P/E ratio)\n - 주가순자산비율 (PBR)\n - 주당순이익 (EPS)\n\
+    \ - 수익 (Revenue), 순이익 (Net Income)\n*애널리스트 분석"
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions:
+  - 'Analyze the stock of Tesla. '
+  - What are some recent development on Nvidia?
+  - 'Do a fundamental analysis for Amazon. '
+  suggested_questions_after_answer:
+    enabled: true
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form: []
+version: 0.3.1

@@ -1,0 +1,1841 @@
+app:
+  description: 통계기반 제품분석보고서
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 통계기반 제품분석보고서
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: stvlynn/doc:0.0.1@900d82963e63c505136dfc77f3e06329326e714ca66bed668224e811f73efc7b
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: hjlarry/database:0.0.6@534bc26cf5bc4ff6b5557457452287ccc71f00eef9378784c4f43ca49954ca2f
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 1750558484094-source-1750557997503-target
+      source: '1750558484094'
+      sourceHandle: source
+      target: '1750557997503'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 17505647146870-source-17505648296400-target
+      source: '17505647146870'
+      sourceHandle: source
+      target: '17505648296400'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 17505649610350-source-17505649697850-target
+      source: '17505649610350'
+      sourceHandle: source
+      target: '17505649697850'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 17505649697850-source-17505650759860-target
+      source: '17505649697850'
+      sourceHandle: source
+      target: '17505650759860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 17505650759860-source-1750570408616-target
+      selected: false
+      source: '17505650759860'
+      sourceHandle: source
+      target: '1750570408616'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: end
+      id: 1750570408616-source-17505707128840-target
+      source: '1750570408616'
+      sourceHandle: source
+      target: '17505707128840'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 17505650759860-source-1750571301557-target
+      source: '17505650759860'
+      sourceHandle: source
+      target: '1750571301557'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1750571301557-source-17505707128840-target
+      source: '1750571301557'
+      sourceHandle: source
+      target: '17505707128840'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1750135306798-source-1755338725146-target
+      source: '1750135306798'
+      sourceHandle: source
+      target: '1755338725146'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1755338725146-source-1750558484094-target
+      source: '1755338725146'
+      sourceHandle: source
+      target: '1750558484094'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1755338853223-source-17505647146870-target
+      source: '1755338853223'
+      sourceHandle: source
+      target: '17505647146870'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1755338906394-source-17505649610350-target
+      source: '1755338906394'
+      sourceHandle: source
+      target: '17505649610350'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1750135306798-source-1755338853223-target
+      source: '1750135306798'
+      sourceHandle: source
+      target: '1755338853223'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1750135306798-source-1755338906394-target
+      source: '1750135306798'
+      sourceHandle: source
+      target: '1755338906394'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1750557997503-source-17505650759860-target
+      source: '1750557997503'
+      sourceHandle: source
+      target: '17505650759860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 17505648296400-source-17505650759860-target
+      source: '17505648296400'
+      sourceHandle: source
+      target: '17505650759860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables:
+        - label: 사용자 입력
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: input
+      height: 90
+      id: '1750135306798'
+      position:
+        x: 4.285714285714278
+        y: 414
+      positionAbsolute:
+        x: 4.285714285714278
+        y: 414
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The SQL query string.
+            ja_JP: The SQL query string.
+            pt_BR: The SQL query string.
+            zh_Hans: SQL 查询语句。
+          label:
+            en_US: SQL Query
+            ja_JP: SQL Query
+            pt_BR: SQL Query
+            zh_Hans: SQL 查询语句
+          llm_description: The SQL query string.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: json
+          form: form
+          human_description:
+            en_US: Choose the output format.
+            ja_JP: Choose the output format.
+            pt_BR: Choose the output format.
+            zh_Hans: 选择输出格式。
+          label:
+            en_US: Output format
+            ja_JP: Output format
+            pt_BR: Output format
+            zh_Hans: 输出格式
+          llm_description: ''
+          max: null
+          min: null
+          name: format
+          options:
+          - label:
+              en_US: JSON
+              ja_JP: JSON
+              pt_BR: JSON
+              zh_Hans: JSON
+            value: json
+          - label:
+              en_US: CSV
+              ja_JP: CSV
+              pt_BR: CSV
+              zh_Hans: CSV
+            value: csv
+          - label:
+              en_US: YAML
+              ja_JP: YAML
+              pt_BR: YAML
+              zh_Hans: YAML
+            value: yaml
+          - label:
+              en_US: Markdown
+              ja_JP: Markdown
+              pt_BR: Markdown
+              zh_Hans: Markdown
+            value: md
+          - label:
+              en_US: Excel
+              ja_JP: Excel
+              pt_BR: Excel
+              zh_Hans: Excel
+            value: xlsx
+          - label:
+              en_US: HTML
+              ja_JP: HTML
+              pt_BR: HTML
+              zh_Hans: HTML
+            value: html
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          format: ''
+          query: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: SQL EXECUTE(매출실적결과)
+        tool_configurations:
+          config_options:
+            type: mixed
+            value: ''
+          format:
+            type: constant
+            value: md
+        tool_description: This tool is used to execute SQL in an existing database.
+        tool_label: SQL Execute
+        tool_name: sql_execute
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: ''
+          query:
+            type: mixed
+            value: '{{#1750558484094.text#}}'
+        type: tool
+      height: 116
+      id: '1750557997503'
+      position:
+        x: 942
+        y: 414
+      positionAbsolute:
+        x: 942
+        y: 414
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: de5e25d9-3748-4b00-bb8f-7eb02c72522d
+          role: system
+          text: "# 역할\n당신은 사용자의 질문을 PostgreSQL SQL 쿼리로 변환해주는 유능한 AI 데이터 분석가입니다.\n\n\
+            # 지시사항 \n- 아래에 제공되는 '데이터베이스 스키마'를 반드시 참고하여 '변경대상 쿼리'를 수정해야 합니다. \n- 스키마에\
+            \ 존재하지 않는 컬럼은 절대로 사용해서는 안 됩니다. \n- 응답은 다른 부가적인 설명 없이 오직 SQL 쿼리만 생성해야 합니다.\
+            \ \n- 테이블과 컬럼 이름에 한글이 포함되어 있으므로, \"큰따옴표\"로 감싸서 명확하게 지정해주세요.\n- [매우 중요]\
+            \ 당신의 응답은 다른 어떤 부가적인 설명, 줄바꿈, Markdown 코드 블록(```)도 없이, 순수한 SQL 쿼리 텍스트만으로\
+            \ 구성되어야 합니다.\n\n# 변경대상 쿼리\n{{#1755338725146.text#}}\n\n# 데이터베이스 스키마\n\
+            CREATE TABLE public.제품별매출실적 (\n  그룹 text null,\n  제품명 text NOT NULL,\n\
+            \  목표매출 double precision,\n  실제매출 double precision,\n  달성률 bigint,\n);\n\
+            \n# 생성할 SQL 쿼리:"
+        selected: false
+        title: LLM(매출실적)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1750558484094'
+      position:
+        x: 638
+        y: 414
+      positionAbsolute:
+        x: 638
+        y: 414
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: de5e25d9-3748-4b00-bb8f-7eb02c72522d
+          role: system
+          text: "# 역할\n당신은 사용자의 질문을 PostgreSQL SQL 쿼리로 변환해주는 유능한 AI 데이터 분석가입니다.\n\n\
+            # 지시사항 \n- 아래에 제공되는 '데이터베이스 스키마'를 반드시 참고하여 '변경대상 쿼리'를 수정해야 합니다. \n- 스키마에\
+            \ 존재하지 않는 컬럼은 절대로 사용해서는 안 됩니다. \n- 응답은 다른 부가적인 설명 없이 오직 SQL 쿼리만 생성해야 합니다.\
+            \ \n- 테이블과 컬럼 이름에 한글이 포함되어 있으므로, \"큰따옴표\"로 감싸서 명확하게 지정해주세요.\n- [매우 중요]\
+            \ 당신의 응답은 다른 어떤 부가적인 설명, 줄바꿈, Markdown 코드 블록(```)도 없이, 순수한 SQL 쿼리 텍스트만으로\
+            \ 구성되어야 합니다.\n\n# 변경대상 쿼리\n{{#1755338853223.text#}}\n\n# 데이터베이스 스키마\n\
+            create table public.제품별마케팅 (\n  날짜 text null,\n  제품명 text null,\n  마케팅채널\
+            \ text null,\n  마케팅비용 bigint null,\n  노출수 bigint null,\n  클릭수 bigint null,\n\
+              전환수 bigint null\n) TABLESPACE pg_default;\n\n# 생성할 SQL 쿼리:"
+        selected: false
+        title: LLM(마케팅)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '17505647146870'
+      position:
+        x: 638
+        y: 570
+      positionAbsolute:
+        x: 638
+        y: 570
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The SQL query string.
+            ja_JP: The SQL query string.
+            pt_BR: The SQL query string.
+            zh_Hans: SQL 查询语句。
+          label:
+            en_US: SQL Query
+            ja_JP: SQL Query
+            pt_BR: SQL Query
+            zh_Hans: SQL 查询语句
+          llm_description: The SQL query string.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: json
+          form: form
+          human_description:
+            en_US: Choose the output format.
+            ja_JP: Choose the output format.
+            pt_BR: Choose the output format.
+            zh_Hans: 选择输出格式。
+          label:
+            en_US: Output format
+            ja_JP: Output format
+            pt_BR: Output format
+            zh_Hans: 输出格式
+          llm_description: ''
+          max: null
+          min: null
+          name: format
+          options:
+          - label:
+              en_US: JSON
+              ja_JP: JSON
+              pt_BR: JSON
+              zh_Hans: JSON
+            value: json
+          - label:
+              en_US: CSV
+              ja_JP: CSV
+              pt_BR: CSV
+              zh_Hans: CSV
+            value: csv
+          - label:
+              en_US: YAML
+              ja_JP: YAML
+              pt_BR: YAML
+              zh_Hans: YAML
+            value: yaml
+          - label:
+              en_US: Markdown
+              ja_JP: Markdown
+              pt_BR: Markdown
+              zh_Hans: Markdown
+            value: md
+          - label:
+              en_US: Excel
+              ja_JP: Excel
+              pt_BR: Excel
+              zh_Hans: Excel
+            value: xlsx
+          - label:
+              en_US: HTML
+              ja_JP: HTML
+              pt_BR: HTML
+              zh_Hans: HTML
+            value: html
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          format: ''
+          query: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: SQL EXECUTE(마케팅결과)
+        tool_configurations:
+          config_options:
+            type: constant
+            value: null
+          format:
+            type: constant
+            value: md
+        tool_description: This tool is used to execute SQL in an existing database.
+        tool_label: SQL Execute
+        tool_name: sql_execute
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: ''
+          query:
+            type: mixed
+            value: '{{#17505647146870.text#}}'
+        type: tool
+      height: 116
+      id: '17505648296400'
+      position:
+        x: 942
+        y: 570
+      positionAbsolute:
+        x: 942
+        y: 570
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: de5e25d9-3748-4b00-bb8f-7eb02c72522d
+          role: system
+          text: "# 역할\n당신은 사용자의 질문을 PostgreSQL SQL 쿼리로 변환해주는 유능한 AI 데이터 분석가입니다.\n\n\
+            # 지시사항 \n- 아래에 제공되는 '데이터베이스 스키마'를 반드시 참고하여 '변경대상 쿼리'를 수정해야 합니다. \n- 스키마에\
+            \ 존재하지 않는 컬럼은 절대로 사용해서는 안 됩니다. \n- 응답은 다른 부가적인 설명 없이 오직 SQL 쿼리만 생성해야 합니다.\
+            \ \n- 테이블과 컬럼 이름에 한글이 포함되어 있으므로, \"큰따옴표\"로 감싸서 명확하게 지정해주세요.\n- [매우 중요]\
+            \ 당신의 응답은 다른 어떤 부가적인 설명, 줄바꿈, Markdown 코드 블록(```)도 없이, 순수한 SQL 쿼리 텍스트만으로\
+            \ 구성되어야 합니다.\n\n# 변경대상 쿼리\n{{#1755338906394.text#}}\n\n# 데이터베이스 스키마\n\
+            create table public.제품별고객문의 (\n  날짜 text null,\n  제품명 text null,\n  유형\
+            \ text null,\n  고객문의 text null,\n  답변내용 text null,\n  담당자 text null\n\
+            ) TABLESPACE pg_default;\n\n# 생성할 SQL 쿼리:"
+        selected: false
+        title: LLM(고객문의)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '17505649610350'
+      position:
+        x: 638
+        y: 258
+      positionAbsolute:
+        x: 638
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The SQL query string.
+            ja_JP: The SQL query string.
+            pt_BR: The SQL query string.
+            zh_Hans: SQL 查询语句。
+          label:
+            en_US: SQL Query
+            ja_JP: SQL Query
+            pt_BR: SQL Query
+            zh_Hans: SQL 查询语句
+          llm_description: The SQL query string.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: json
+          form: form
+          human_description:
+            en_US: Choose the output format.
+            ja_JP: Choose the output format.
+            pt_BR: Choose the output format.
+            zh_Hans: 选择输出格式。
+          label:
+            en_US: Output format
+            ja_JP: Output format
+            pt_BR: Output format
+            zh_Hans: 输出格式
+          llm_description: ''
+          max: null
+          min: null
+          name: format
+          options:
+          - label:
+              en_US: JSON
+              ja_JP: JSON
+              pt_BR: JSON
+              zh_Hans: JSON
+            value: json
+          - label:
+              en_US: CSV
+              ja_JP: CSV
+              pt_BR: CSV
+              zh_Hans: CSV
+            value: csv
+          - label:
+              en_US: YAML
+              ja_JP: YAML
+              pt_BR: YAML
+              zh_Hans: YAML
+            value: yaml
+          - label:
+              en_US: Markdown
+              ja_JP: Markdown
+              pt_BR: Markdown
+              zh_Hans: Markdown
+            value: md
+          - label:
+              en_US: Excel
+              ja_JP: Excel
+              pt_BR: Excel
+              zh_Hans: Excel
+            value: xlsx
+          - label:
+              en_US: HTML
+              ja_JP: HTML
+              pt_BR: HTML
+              zh_Hans: HTML
+            value: html
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          format: ''
+          query: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: SQL EXECUTE(고객문의결과)
+        tool_configurations:
+          config_options:
+            type: constant
+            value: null
+          format:
+            type: constant
+            value: md
+        tool_description: This tool is used to execute SQL in an existing database.
+        tool_label: SQL Execute
+        tool_name: sql_execute
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: ''
+          query:
+            type: mixed
+            value: '{{#17505649610350.text#}}'
+        type: tool
+      height: 116
+      id: '17505649697850'
+      position:
+        x: 942
+        y: 258
+      positionAbsolute:
+        x: 942
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 9e597054-eb11-4744-8f27-4a27e790ca60
+          role: system
+          text: "# 역할\n당신은 여러 데이터를 종합하여 핵심을 꿰뚫는 인사이트를 도출하고, 명확한 전략을 제시하는 유능한 시니어 프로덕트\
+            \ 매니저(Senior Product Manager)입니다.\n\n# 지시사항\n당신은 특정 제품에 대한 실적, 마케팅, 고객\
+            \ 문의 데이터를 전달받았습니다. 이 모든 정보를 종합적으로 분석하여 아래 \"보고서 형식\"에 맞춰 체계적인 분석 보고서를\
+            \ 작성해야 합니다. 각 항목은 구체적인 데이터를 근거로 논리적으로 서술해주세요.\n\n# 분석 대상 제품명\n{{#1750135306798.input#}}\n\
+            \n# 전달된 데이터\n[실적 데이터]\n{{#1750557997503.text#}}\n\n[마케팅 데이터]\n{{#17505648296400.text#}}\n\
+            \n[고객 문의 데이터]\n{{#17505649697850.text#}}\n\n# 보고서 형식\n다음 형식에 맞춰 보고서를 작성하세요.\n\
+            \n## Ⅰ. 고객 분석 요약\n- 실적, 마케팅, 고객 문의 데이터를 종합했을 때, 이 제품의 고객들은 어떤 특징을 보이는지\
+            \ 한두 문단으로 요약합니다.\n- (예: \"OOO 제품은 높은 마케팅 비용에도 불구하고, '핵심 기능 오류'에 대한 고객\
+            \ 불만이 지속되어 실적 달성률이 저조한, 잠재력은 있으나 품질 개선이 시급한 제품입니다.\")\n\n## Ⅱ. 실적 분석 (Performance\
+            \ Analysis)\n- 전달된 [실적 데이터]를 기반으로 목표 대비 실적, 달성률 등을 구체적인 수치로 제시합니다.\n-\
+            \ 이 제품이 전체 포트폴리오에서 차지하는 위상(주력 제품, 신제품 등)을 언급하며 실적의 의미를 해석합니다.\n\n## Ⅲ.\
+            \ 마케팅 분석 (Marketing Analysis)\n- 전달된 [마케팅 데이터]를 기반으로, 해당 제품에 대해 어떤 마케팅\
+            \ 캠페인이 진행되었는지 요약합니다.\n- 마케팅 활동의 성과(비용 대비 효과)를 실적 데이터와 연관 지어 분석합니다.\n-\
+            \ (예: \"대규모 할인 프로모션을 진행했으나, 실제 매출 증대로 이어지지 못했습니다.\")\n\n## Ⅳ. 고객 문의 분석\
+            \ (Customer Inquiry Analysis)\n- 전달된 [고객 문의 데이터]를 기반으로, 가장 빈번하게 접수된 문의\
+            \ 유형(예: 배송, 환불, 기능 불량)의 순위와 비중을 분석합니다.\n- 제품의 근본적인 문제점을 파악할 수 있는 핵심적인\
+            \ 고객 불만 사항을 구체적으로 인용하고, 그 심각성을 평가합니다.\n\n## Ⅴ. 향후 전략 (Future Strategy)\n\
+            - 위 1~4번의 종합 분석을 바탕으로, 이 제품의 실적 개선을 위한 구체적인 액션 아이템을 제안합니다.\n- 아래와 같이 담당\
+            \ 부서별로 전략을 나누어 제시합니다.\n  - **제품 개발팀:** (예: 가장 시급하게 개선해야 할 기능, 품질 안정화 방안)\n\
+            \  - **마케팅팀:** (예: 잘못된 소구점 수정, 새로운 타겟 고객층 설정, 프로모션 전략 변경)\n  - **영업/CS팀:**\
+            \ (예: 고객 불만 응대 프로세스 개선, 예상 질문에 대한 FAQ 마련)"
+        selected: false
+        title: LLM(최종 보고서 생성)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '17505650759860'
+      position:
+        x: 1246
+        y: 414
+      positionAbsolute:
+        x: 1246
+        y: 414
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The Markdown content to be converted to Word document
+            ja_JP: Word ドキュメントに変換する Markdown コンテンツ
+            pt_BR: O conteúdo Markdown a ser convertido para documento Word
+            zh_Hans: 要转换为Word文档的Markdown内容
+          label:
+            en_US: Markdown Content
+            ja_JP: Markdown コンテンツ
+            pt_BR: Conteúdo Markdown
+            zh_Hans: Markdown内容
+          llm_description: The Markdown content that will be converted to a Word document
+          max: null
+          min: null
+          name: markdown_content
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The title of the Word document
+            ja_JP: Word ドキュメントのタイトル
+            pt_BR: O título do documento Word
+            zh_Hans: Word文档的标题
+          label:
+            en_US: Document Title
+            ja_JP: ドキュメントタイトル
+            pt_BR: Título do Documento
+            zh_Hans: 文档标题
+          llm_description: The title that will be displayed at the top of the Word
+            document
+          max: null
+          min: null
+          name: title
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          markdown_content: ''
+          title: ''
+        provider_id: stvlynn/doc/doc
+        provider_name: stvlynn/doc/doc
+        provider_type: builtin
+        selected: false
+        title: Markdown to DOCX Converter
+        tool_configurations: {}
+        tool_description: Convert Markdown content to a DOCX (Word) document
+        tool_label: Markdown to DOCX Converter
+        tool_name: markdown_to_docx_converter
+        tool_node_version: '2'
+        tool_parameters:
+          markdown_content:
+            type: mixed
+            value: '{{#17505650759860.text#}}'
+          title:
+            type: mixed
+            value: '{{#1750135306798.input#}} 분석 보고서'
+        type: tool
+      height: 54
+      id: '1750570408616'
+      position:
+        x: 1550
+        y: 414
+      positionAbsolute:
+        x: 1550
+        y: 414
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1750570408616'
+          - files
+          variable: MS워드
+        - value_selector:
+          - '1750571301557'
+          - text
+          variable: 감마스크립트
+        selected: false
+        title: 끝
+        type: end
+      height: 116
+      id: '17505707128840'
+      position:
+        x: 1854
+        y: 414
+      positionAbsolute:
+        x: 1854
+        y: 414
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 374cc9f4-cdf4-4601-b341-9d275c3329f0
+          role: system
+          text: '# 역할
+
+            당신은 주어진 상세 분석 보고서의 내용을 바탕으로, 경영진을 완벽하게 설득할 수 있는 총 8장의 시각적인 Gamma.ai 프레젠테이션을
+            기획하고 스크립트를 작성하는 전문 프레젠테이션 디자이너입니다.
+
+
+            #입력데이터
+
+            {{#17505650759860.text#}}
+
+
+            # 최종 목표
+
+            - 입력된 상세 보고서의 핵심 내용을 추출하고 재구성하여, 총 8개의 카드(슬라이드)로 구성된 Gamma.ai용 프레젠테이션
+            스크립트**를 생성합니다.
+
+            - 각 카드는 단순히 텍스트만 나열하는 것이 아니라, Gamma.ai가 시각적으로 구현할 수 있도록 콘텐츠 유형과 레이아웃 제안을
+            포함해야 합니다.
+
+
+            # Gamma.ai 스크립트 작성 가이드라인
+
+            - 각 카드는 명확한 제목과 2~4개의 핵심 불릿 포인트로 구성됩니다.
+
+            - 텍스트는 간결하고 명확하게 작성하여 가독성을 높입니다.
+
+            - 데이터는 가능한 한 표, 다이어그램, 수치 강조 등 시각적인 형태로 표현하도록 제안합니다.
+
+            - 각 카드는 제목과 내용으로 구분하여 작성합니다.
+
+
+            # 작업 워크플로우
+
+            1.  보고서 핵심 파악: 입력된 보고서 전체를 읽고, 문제의 심각성, 데이터 기반 원인, 그리고 제안된 해결책의 흐름을 파악합니다.
+
+            2.  8단계 스토리라인 설계: 보고서 내용을 기-승-전-결의 설득력 있는 8단계 스토리라인으로 재구성합니다. (예: 요약 →
+            문제 정의 → 원인 분석 1, 2 → 해결책 → 세부 실행 계획 → 결론)
+
+            3.  카드별 콘텐츠 기획: 각 스토리라인 단계에 맞춰, 어떤 메시지와 데이터를 어떤 시각적 형태로 보여줄지 구체적으로 기획합니다.
+
+            4.  스크립트 최종 작성: 위 기획에 따라, 아래 형식에 맞춰 8페이지의 Gamma.ai 스크립트를 최종적으로 작성합니다.
+
+            5. (중요)데이터에 없는 내용을 기술하지 않습니다.'
+        selected: true
+        title: LLM(감마스크립트생성)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1750571301557'
+      position:
+        x: 1550
+        y: 508
+      positionAbsolute:
+        x: 1550
+        y: 508
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The user query.
+            ja_JP: The user query.
+            pt_BR: The user query.
+            zh_Hans: 用户的问题。
+          label:
+            en_US: Query string
+            ja_JP: Query string
+            pt_BR: Query string
+            zh_Hans: 查询语句
+          llm_description: The user query.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            ja_JP: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            pt_BR: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            zh_Hans: 指定哪些表用于提供给LLM作为上下文，如不指定，则使用所有表。多张表用半角逗号隔开。
+          label:
+            en_US: Tables
+            ja_JP: Tables
+            pt_BR: Tables
+            zh_Hans: 表
+          llm_description: Specify which tables schema do you want to get as model
+            context. Multi tables use comma to separate. Leave it blank if you want
+            to get all tables schema.
+          max: null
+          min: null
+          name: tables
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Choose the model.
+            ja_JP: Choose the model.
+            pt_BR: Choose the model.
+            zh_Hans: 选择模型。
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: 模型
+          llm_description: ''
+          max: null
+          min: null
+          name: model
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: llm
+          template: null
+          type: model-selector
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: secret-input
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          model: ''
+          query: ''
+          tables: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: Text to SQL(매출실적)
+        tool_configurations:
+          config_options:
+            type: mixed
+            value: null
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+        tool_description: supply to LLM the context of the database and the user query
+          to get a sql string.
+        tool_label: Text to SQL
+        tool_name: text2sql
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: null
+          query:
+            type: mixed
+            value: '{{#1750135306798.input#}}'
+          tables:
+            type: mixed
+            value: null
+        type: tool
+      height: 116
+      id: '1755338725146'
+      position:
+        x: 334
+        y: 414
+      positionAbsolute:
+        x: 334
+        y: 414
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The user query.
+            ja_JP: The user query.
+            pt_BR: The user query.
+            zh_Hans: 用户的问题。
+          label:
+            en_US: Query string
+            ja_JP: Query string
+            pt_BR: Query string
+            zh_Hans: 查询语句
+          llm_description: The user query.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            ja_JP: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            pt_BR: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            zh_Hans: 指定哪些表用于提供给LLM作为上下文，如不指定，则使用所有表。多张表用半角逗号隔开。
+          label:
+            en_US: Tables
+            ja_JP: Tables
+            pt_BR: Tables
+            zh_Hans: 表
+          llm_description: Specify which tables schema do you want to get as model
+            context. Multi tables use comma to separate. Leave it blank if you want
+            to get all tables schema.
+          max: null
+          min: null
+          name: tables
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Choose the model.
+            ja_JP: Choose the model.
+            pt_BR: Choose the model.
+            zh_Hans: 选择模型。
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: 模型
+          llm_description: ''
+          max: null
+          min: null
+          name: model
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: llm
+          template: null
+          type: model-selector
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: secret-input
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          model: ''
+          query: ''
+          tables: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: Text to SQL(마케팅)
+        tool_configurations:
+          config_options:
+            type: mixed
+            value: null
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+        tool_description: supply to LLM the context of the database and the user query
+          to get a sql string.
+        tool_label: Text to SQL
+        tool_name: text2sql
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: null
+          query:
+            type: mixed
+            value: '{{#1750135306798.input#}}'
+          tables:
+            type: mixed
+            value: 제품별마케팅
+        type: tool
+      height: 116
+      id: '1755338853223'
+      position:
+        x: 334
+        y: 570
+      positionAbsolute:
+        x: 334
+        y: 570
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The user query.
+            ja_JP: The user query.
+            pt_BR: The user query.
+            zh_Hans: 用户的问题。
+          label:
+            en_US: Query string
+            ja_JP: Query string
+            pt_BR: Query string
+            zh_Hans: 查询语句
+          llm_description: The user query.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            ja_JP: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            pt_BR: Specify which tables to provide to LLM as context. If not specified,
+              all tables will be used. Multi tables use comma to separate.
+            zh_Hans: 指定哪些表用于提供给LLM作为上下文，如不指定，则使用所有表。多张表用半角逗号隔开。
+          label:
+            en_US: Tables
+            ja_JP: Tables
+            pt_BR: Tables
+            zh_Hans: 表
+          llm_description: Specify which tables schema do you want to get as model
+            context. Multi tables use comma to separate. Leave it blank if you want
+            to get all tables schema.
+          max: null
+          min: null
+          name: tables
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Choose the model.
+            ja_JP: Choose the model.
+            pt_BR: Choose the model.
+            zh_Hans: 选择模型。
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: 模型
+          llm_description: ''
+          max: null
+          min: null
+          name: model
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: llm
+          template: null
+          type: model-selector
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            ja_JP: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            pt_BR: Optional, Filling in this field will overwrite the database connection
+              entered during authorization.
+            zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+          label:
+            en_US: DB URI
+            ja_JP: DB URI
+            pt_BR: DB URI
+            zh_Hans: DB URI
+          llm_description: ''
+          max: null
+          min: null
+          name: db_uri
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: secret-input
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            ja_JP: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            pt_BR: 'Optional. For example {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              More connection options can be found at https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+            zh_Hans: '选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
+
+              更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+
+              '
+          label:
+            en_US: DB Config Options
+            ja_JP: DB Config Options
+            pt_BR: DB Config Options
+            zh_Hans: 数据库连接配置选项
+          llm_description: ''
+          max: null
+          min: null
+          name: config_options
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          config_options: ''
+          db_uri: ''
+          model: ''
+          query: ''
+          tables: ''
+        provider_id: hjlarry/database/database
+        provider_name: hjlarry/database/database
+        provider_type: builtin
+        selected: false
+        title: Text to SQL(고객문의)
+        tool_configurations:
+          config_options:
+            type: mixed
+            value: null
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+        tool_description: supply to LLM the context of the database and the user query
+          to get a sql string.
+        tool_label: Text to SQL
+        tool_name: text2sql
+        tool_node_version: '2'
+        tool_parameters:
+          db_uri:
+            type: mixed
+            value: null
+          query:
+            type: mixed
+            value: '{{#1750135306798.input#}}'
+          tables:
+            type: mixed
+            value: 제품별고객문의
+        type: tool
+      height: 116
+      id: '1755338906394'
+      position:
+        x: 334
+        y: 258
+      positionAbsolute:
+        x: 334
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -713.2727618937522
+      y: -31.392971207993014
+      zoom: 0.923655537541026

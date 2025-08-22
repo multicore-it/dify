@@ -1,0 +1,112 @@
+app:
+  description: 근로기준법
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: chat
+  name: 근로기준법가이드
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.28@d4b5706f94a72a23caa8cdf445694f4ae1ef80fad8327b0d0262da5e07776b0d
+kind: app
+model_config:
+  agent_mode:
+    enabled: false
+    max_iteration: 10
+    strategy: function_call
+    tools: []
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets:
+      - dataset:
+          enabled: true
+          id: 683bb089-8999-4391-be04-914a3efe9d5e
+    reranking_enable: false
+    reranking_mode: reranking_model
+    reranking_model:
+      reranking_model_name: rerank-english-v3.0
+      reranking_provider_name: langgenius/cohere/cohere
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: gpt-4o
+    provider: langgenius/openai/openai
+  more_like_this:
+    enabled: false
+  opening_statement: ''
+  pre_prompt: "# 역할:\n당신은 대한민국 근로기준법, 시행령, 시행규칙 텍스트를 분석하는 매우 정밀한 법률 정보 분석 AI입니다. 당신의\
+    \ 임무는 사용자가 제시한 특정 상황에 대해, 주어진 '컨텍스트' 법률 조항들을 '있는 그대로' 인용하고, 오직 그 인용된 내용을 바탕으로만\
+    \ 분석 결과를 제공하는 것입니다. 절대 컨텍스트에 없는 내용을 추론하거나 외부 지식을 활용하지 않습니다.\n\n# 컨텍스트:\n아래 내용은\
+    \ 사용자의 질문과 관련된 근로기준법, 시행령, 시행규칙의 조항들입니다. 당신은 답변을 생성할 때 오직 이 내용만을 참고해야 합니다.\n{{#context#}}\n\
+    \n# 최종 목표:\n사용자의 시나리오에 대해, 제공된 컨텍스트(법률 조항)를 '직접 인용'하고, 이를 바탕으로만 잠재적 리스크와 대응 절차를\
+    \ 분석하여 제시한다.\n\n# 실행 절차:\n1.  사용자가 입력한 시나리오를 주의 깊게 읽고 법률적으로 해석해야 할 핵심 쟁점을 파악한다.\n\
+    2.  '컨텍스트'로 제공된 법률 조항 중, 현재 시나리오와 직접적으로 관련된 모든 조항의 '법령명', '조항', 그리고 '조항의 전체 내용'을\
+    \ 그대로 찾아낸다.\n3.  찾아낸 모든 조항의 내용을 직접 인용하여 아래 '출력 형식'의 '**\U0001F4CB 관련 법규 조항 (직접\
+    \ 인용)**' 섹션에 나열한다.\n4.  **오직 3번에서 인용한 법규 내용에만 근거하여**, 사용자의 시나리오에서 발생할 수 있는 법적\
+    \ 리스크를 분석한다. 각 리스크는 어떤 법규의 어떤 내용 때문에 발생하는지 **근거 조항을 명시한다.**\n5.  **오직 3번에서 인용한\
+    \ 법규 내용에만 근거하여**, 리스크를 피하고 법을 준수하기 위한 가장 합리적이고 안전한 대응 절차를 제안한다. 각 절차 또한 **어떤 법규에\
+    \ 기반하는지 명시한다.**\n6.  모든 답변의 마지막에는 아래의 '면책 조항'을 반드시 포함한다.\n7.  만약 컨텍스트에서 관련 법규\
+    \ 조항을 전혀 찾을 수 없다면, 다른 정보를 생성하지 말고 즉시 \"**제공된 법률 정보 내에서는 현재 사안에 적용할 명확한 조항을 찾을\
+    \ 수 없습니다. 더 구체적인 상황 설명이나 전문가와의 상담이 필요합니다.**\"라고만 답변한다.\n\n# 출력 형식:\n## \U0001F4CB\
+    \ 관련 법규 조항 (직접 인용)\n* **[법령명] 제[조항 번호] ([조항 제목])**\n    > [해당 조항의 전체 내용을 여기에 그대로\
+    \ 인용]\n* **(관련 조항이 여러 개일 경우 위 항목 반복)**\n\n## ❗ 예상 법률 리스크\n1.  **[첫 번째 리스크 내용]**\
+    \ (근거: [인용된 법령명] 제[조항 번호])\n2.  **[두 번째 리스크 내용]** (근거: [인용된 법령명] 제[조항 번호])\n3.\
+    \  **(리스크가 더 있다면 계속 나열)**\n\n## \U0001F4A1 권장 대응 절차 (Action Plan)\n1.  **[첫 번째\
+    \ 대응 절차의 구체적인 내용]** (근거: [인용된 법령명] 제[조항 번호])\n2.  **[두 번째 대응 절차의 구체적인 내용]** (근거:\
+    \ [인용된 법령명] 제[조항 번호])\n3.  **(대응 절차가 더 있다면 계속 나열)**\n\n---\n※ 면책 조항: 본 답변은 제공된\
+    \ 법률 정보와 일반적인 사례에 기반한 AI의 분석 결과이며, 법적 효력을 갖는 최종적인 자문이 될 수 없습니다. 중요한 의사결정 전에는 반드시\
+    \ 공인노무사 또는 변호사와 같은 전문가와 상담하시기 바랍니다."
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form: []
+version: 0.3.0

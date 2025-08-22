@@ -1,0 +1,342 @@
+app:
+  description: 근로기준법생성기
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 근로기준법생성기
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: xyy/txtgenarator:0.0.2@bad4a615f63278162a71d77635f516c050756cee5a34e3faa20d4971bcd59ccf
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1755255743051-source-1755255780887-target
+      source: '1755255743051'
+      sourceHandle: source
+      target: '1755255780887'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1755255780887-source-1755255801738-target
+      source: '1755255780887'
+      sourceHandle: source
+      target: '1755255801738'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 1755255801738-source-1755256280420-target
+      source: '1755255801738'
+      sourceHandle: source
+      target: '1755256280420'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: end
+      id: 1755256280420-source-1755256240479-target
+      source: '1755256280420'
+      sourceHandle: source
+      target: '1755256240479'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          label: 근로기준법파일
+          max_length: 5
+          options: []
+          required: true
+          type: file-list
+          variable: input_file
+        - label: 법률명
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: law_name
+      height: 116
+      id: '1755255743051'
+      position:
+        x: 102.43163448313919
+        y: 282
+      positionAbsolute:
+        x: 102.43163448313919
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: true
+        selected: false
+        title: Doc 추출기
+        type: document-extractor
+        variable_selector:
+        - '1755255743051'
+        - input_file
+      height: 94
+      id: '1755255780887'
+      position:
+        x: 405
+        y: 282
+      positionAbsolute:
+        x: 405
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1755255780887'
+          - text
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 8db3a1e6-2537-4e80-845f-3cb30bac00af
+          role: system
+          text: '#역할: 당신은 유능한 법률 RAG 구성 전문가입니다.
+
+
+            #데이터
+
+            {{#context#}}
+
+
+            #지침
+
+            1. 조항별로 다음을 만들어서 조항 바로 위에 저장해주세요.
+
+
+            [문서종류: 법률]
+
+            [법령명: {{#1755255743051.law_name#}}]
+
+            [조항: 제1조 (목적)]
+
+            [키워드: 차별, 남녀, 성별, 국적, 신앙, 사회적 신분]
+
+
+            2. 조항 사례
+
+
+            제1조(목적) 이 법은 헌법에 따라 근로조건의 기준을 정함으로써 근로자의 기본적 생활을 보장, 향상시키며 균형 있는 국민경제의
+            발전을 꾀하는 것을 목적으로 한다.
+
+
+            3. 조항이 끝나면 구분표시를 넣어주세요'
+        selected: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755255801738'
+      position:
+        x: 695.3318101414504
+        y: 282
+      positionAbsolute:
+        x: 695.3318101414504
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1755256280420'
+          - files
+          value_type: array[file]
+          variable: files
+        selected: false
+        title: 끝
+        type: end
+      height: 90
+      id: '1755256240479'
+      position:
+        x: 1285.799579822057
+        y: 282
+      positionAbsolute:
+        x: 1285.799579822057
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: generate txt file from input
+            ja_JP: generate txt file from input
+            pt_BR: generate txt file from input
+            zh_Hans: generate txt file from input
+          label:
+            en_US: Query string
+            ja_JP: Query string
+            pt_BR: Query string
+            zh_Hans: 查询语句
+          llm_description: generate txt file from input
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: title
+            ja_JP: title
+            pt_BR: title
+            zh_Hans: title
+          label:
+            en_US: title
+            ja_JP: title
+            pt_BR: title
+            zh_Hans: 题目
+          llm_description: title
+          max: null
+          min: null
+          name: title
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          query: ''
+          title: ''
+        provider_id: xyy/txtgenarator/txtgenarator
+        provider_name: xyy/txtgenarator/txtgenarator
+        provider_type: builtin
+        selected: false
+        title: txtgenarator
+        tool_configurations: {}
+        tool_description: generate txt file from input
+        tool_label: txtgenarator
+        tool_name: txtgenarator
+        tool_node_version: '2'
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1755255801738.text#}}'
+          title:
+            type: mixed
+            value: '{{#1755255743051.law_name#}}'
+        type: tool
+      height: 54
+      id: '1755256280420'
+      position:
+        x: 992.1241347236783
+        y: 282
+      positionAbsolute:
+        x: 992.1241347236783
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 55.65925617288167
+      y: -7.801916796288253
+      zoom: 0.757858283255199

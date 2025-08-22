@@ -1,0 +1,862 @@
+app:
+  description: 암호화폐기술적분석
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 암호화폐기술적분석
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1755477663716-source-1755487257634-target
+      selected: false
+      source: '1755477663716'
+      sourceHandle: source
+      target: '1755487257634'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1755479527415-source-1755479704514-target
+      selected: false
+      source: '1755479527415'
+      sourceHandle: source
+      target: '1755479704514'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: http-request
+      id: 1755477667694-source-17554878099920-target
+      selected: false
+      source: '1755477667694'
+      sourceHandle: source
+      target: '17554878099920'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1755487257634-source-1755477667694-target
+      selected: false
+      source: '1755487257634'
+      sourceHandle: source
+      target: '1755477667694'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1755479102577-source-1755479527415-target
+      selected: false
+      source: '1755479102577'
+      sourceHandle: source
+      target: '1755479527415'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17554878099920-source-1755490850820-target
+      source: '17554878099920'
+      sourceHandle: source
+      target: '1755490850820'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 1755490850820-source-17554878061680-target
+      source: '1755490850820'
+      sourceHandle: source
+      target: '17554878061680'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17554878061680-source-17554910338710-target
+      source: '17554878061680'
+      sourceHandle: source
+      target: '17554910338710'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 17554910338710-source-17554876869700-target
+      source: '17554910338710'
+      sourceHandle: source
+      target: '17554876869700'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17554876869700-source-17554910373740-target
+      source: '17554876869700'
+      sourceHandle: source
+      target: '17554910373740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 17554910373740-source-17554876818900-target
+      source: '17554910373740'
+      sourceHandle: source
+      target: '17554876818900'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17554876818900-source-17554910399330-target
+      source: '17554876818900'
+      sourceHandle: source
+      target: '17554910399330'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 17554910399330-source-17554876786880-target
+      source: '17554910399330'
+      sourceHandle: source
+      target: '17554876786880'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17554876786880-source-17554910745750-target
+      source: '17554876786880'
+      sourceHandle: source
+      target: '17554910745750'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 17554910745750-source-1755479102577-target
+      source: '17554910745750'
+      sourceHandle: source
+      target: '1755479102577'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables:
+        - label: 심볼
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: symbol
+        - label: 시간간격
+          max_length: 48
+          options:
+          - 1h
+          - 30m
+          - 15m
+          - 5m
+          - 3m
+          - 1m
+          required: true
+          type: select
+          variable: interval
+      height: 116
+      id: '1755477663716'
+      position:
+        x: 30
+        y: 262
+      positionAbsolute:
+        x: 30
+        y: 262
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: f5a87eb8-fbe4-46bc-9c1f-a17cba7285dc
+          role: system
+          text: '*{{#1755477663716.symbol#}}을 거래소에서 사용하는 심볼코드로 변환해주세요.
+
+            ex) 비트코인 -> BTC/USDT
+
+            *심볼코드만 출력해주세요.'
+        selected: false
+        title: LLM(심볼)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755477667694'
+      position:
+        x: 638
+        y: 262
+      positionAbsolute:
+        x: 638
+        y: 262
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: 'exchange:binance
+
+          symbol:{{#1755477667694.text#}}
+
+          interval:{{#1755477663716.interval#}}
+
+          secret:{{#1755487257634.result#}}'
+        retry_config:
+          max_retries: 1
+          retry_enabled: true
+          retry_interval: 5000
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 요청(candles)
+        type: http-request
+        url: https://api.taapi.io/candles
+        variables: []
+      height: 124
+      id: '1755479102577'
+      position:
+        x: 942
+        y: 1082
+      positionAbsolute:
+        x: 942
+        y: 1082
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: d7bb49df-2342-4171-9d3e-af24d06ca353
+          role: system
+          text: "#역할:\n당신은 유능한 암호화폐 트래이딩 전문가입니다.\n\n#데이터 입력:\n*캔들: \n{{#1755479102577.body#}}\n\
+            *RSI: \n{{#17554876786880.body#}}\n*MACD: \n{{#17554876818900.body#}}\n\
+            *BBANDS: \n{{#17554876869700.body#}}\n*EMA20:\n{{#17554878061680.body#}}\n\
+            *EMA100:\n{{#17554878099920.body#}}\n\n# 지침:\n1. 위 '데이터 입력'에 제시된 모든 기술적\
+            \ 지표들을 종합적으로 분석하여 현재 시장 상황을 명확하게 진단해주세요.\n2. 분석 결과를 바탕으로 최종 투자 판단('매수/매도/관망')을\
+            \ 명확히 제시해주세요.\n3. 투자 판단의 주요 근거를 각 지표와 연결하여 구체적으로 설명해주세요. 긍정적 신호와 잠재적 리스크\
+            \ 신호를 모두 언급해주세요.\n4. 최종 판단에 따른 구체적인 매매 전략(손절가 설정, 분할 매수/매도)을 전문가처럼 조언해주세요.\n\
+            5. 모든 투자에는 원금 손실의 위험이 따르므로, 이 점을 명시하고 투자 결정은 개인의 책임하에 신중하게 내려야 함을 강조해주세요."
+        selected: true
+        title: LLM(투자판단)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755479527415'
+      position:
+        x: 1246
+        y: 590
+      positionAbsolute:
+        x: 1246
+        y: 590
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1755479527415'
+          - text
+          value_type: string
+          variable: output
+        selected: false
+        title: 끝
+        type: end
+      height: 90
+      id: '1755479704514'
+      position:
+        x: 1550
+        y: 590
+      positionAbsolute:
+        x: 1550
+        y: 590
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str, arg2: str) -> dict:\n    return {\n        \"\
+          result\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjhhMjk2Y2I4MDZmZjE2NTFlNmFiYWMyIiwiaWF0IjoxNzU1NDg1OTQ3LCJleHAiOjMzMjU5OTQ5OTQ3fQ.wuc_Ypjd-hO9MlqgeBQaHkqj0YFF3d4m4GVLaDrybOY\"\
+          \n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 코드(암호키)
+        type: code
+        variables:
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg2
+      height: 54
+      id: '1755487257634'
+      position:
+        x: 334
+        y: 262
+      positionAbsolute:
+        x: 334
+        y: 262
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: 'exchange:binance
+
+          symbol:{{#1755477667694.text#}}
+
+          secret:{{#1755487257634.result#}}
+
+          interval:{{#1755477663716.interval#}}'
+        retry_config:
+          max_retries: 1
+          retry_enabled: true
+          retry_interval: 5000
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 요청(rsi)
+        type: http-request
+        url: https://api.taapi.io/rsi
+        variables: []
+      height: 124
+      id: '17554876786880'
+      position:
+        x: 942
+        y: 918
+      positionAbsolute:
+        x: 942
+        y: 918
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: 'exchange:binance
+
+          symbol:{{#1755477667694.text#}}
+
+          secret:{{#1755487257634.result#}}
+
+          interval:{{#1755477663716.interval#}}'
+        retry_config:
+          max_retries: 1
+          retry_enabled: true
+          retry_interval: 5000
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 요청(macd)
+        type: http-request
+        url: https://api.taapi.io/macd
+        variables: []
+      height: 124
+      id: '17554876818900'
+      position:
+        x: 942
+        y: 754
+      positionAbsolute:
+        x: 942
+        y: 754
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: 'exchange:binance
+
+          symbol:{{#1755477667694.text#}}
+
+          secret:{{#1755487257634.result#}}
+
+          interval:{{#1755477663716.interval#}}'
+        retry_config:
+          max_retries: '1'
+          retry_enabled: true
+          retry_interval: 5000
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 요청(bbands)
+        type: http-request
+        url: https://api.taapi.io/bbands
+        variables: []
+      height: 124
+      id: '17554876869700'
+      position:
+        x: 942
+        y: 590
+      positionAbsolute:
+        x: 942
+        y: 590
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: 'exchange:binance
+
+          symbol:{{#1755477667694.text#}}
+
+          secret:{{#1755487257634.result#}}
+
+          period:20
+
+          interval:{{#1755477663716.interval#}}'
+        retry_config:
+          max_retries: '1'
+          retry_enabled: true
+          retry_interval: 5000
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 요청(ema20)
+        type: http-request
+        url: https://api.taapi.io/bbands
+        variables: []
+      height: 124
+      id: '17554878061680'
+      position:
+        x: 942
+        y: 424.57142857142856
+      positionAbsolute:
+        x: 942
+        y: 424.57142857142856
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: 'exchange:binance
+
+          symbol:{{#1755477667694.text#}}
+
+          secret:{{#1755487257634.result#}}
+
+          period:100
+
+          interval:{{#1755477663716.interval#}}'
+        retry_config:
+          max_retries: '1'
+          retry_enabled: true
+          retry_interval: 5000
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 요청(ema100)
+        type: http-request
+        url: https://api.taapi.io/ema
+        variables: []
+      height: 124
+      id: '17554878099920'
+      position:
+        x: 942
+        y: 262
+      positionAbsolute:
+        x: 942
+        y: 262
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str, arg2: str) -> dict:\n    import time\n    time.sleep(10)\n\
+          \    return {\n        \"result\": arg1 + arg2,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 코드(시간지연)
+        type: code
+        variables:
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg2
+      height: 54
+      id: '1755490850820'
+      position:
+        x: 638
+        y: 424.57142857142856
+      positionAbsolute:
+        x: 638
+        y: 424.57142857142856
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str, arg2: str) -> dict:\n    import time\n    time.sleep(10)\n\
+          \    return {\n        \"result\": arg1 + arg2,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 코드(시간지연)
+        type: code
+        variables:
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg2
+      height: 54
+      id: '17554910338710'
+      position:
+        x: 638
+        y: 590
+      positionAbsolute:
+        x: 638
+        y: 590
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str, arg2: str) -> dict:\n    import time\n    time.sleep(10)\n\
+          \    return {\n        \"result\": arg1 + arg2,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 코드(시간지연)
+        type: code
+        variables:
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg2
+      height: 54
+      id: '17554910373740'
+      position:
+        x: 629.7142857142859
+        y: 754
+      positionAbsolute:
+        x: 629.7142857142859
+        y: 754
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str, arg2: str) -> dict:\n    import time\n    time.sleep(10)\n\
+          \    return {\n        \"result\": arg1 + arg2,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 코드(시간지연)
+        type: code
+        variables:
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg2
+      height: 54
+      id: '17554910399330'
+      position:
+        x: 629.7142857142859
+        y: 918
+      positionAbsolute:
+        x: 629.7142857142859
+        y: 918
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str, arg2: str) -> dict:\n    import time\n    time.sleep(10)\n\
+          \    return {\n        \"result\": arg1 + arg2,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 코드(시간지연)
+        type: code
+        variables:
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - '1755477663716'
+          - symbol
+          value_type: string
+          variable: arg2
+      height: 54
+      id: '17554910745750'
+      position:
+        x: 629.7142857142859
+        y: 1082
+      positionAbsolute:
+        x: 629.7142857142859
+        y: 1082
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -457.4000000000001
+      y: -103
+      zoom: 0.7

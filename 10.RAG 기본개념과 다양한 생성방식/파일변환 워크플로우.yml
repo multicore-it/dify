@@ -1,0 +1,232 @@
+app:
+  description: 파일변환 워크플로우
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 파일변환 워크플로우
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1755140216057-source-1755145577192-target
+      source: '1755140216057'
+      sourceHandle: source
+      target: '1755145577192'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1755140169985-source-1755149580968-target
+      source: '1755140169985'
+      sourceHandle: source
+      target: '1755149580968'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1755149580968-source-1755140216057-target
+      source: '1755149580968'
+      sourceHandle: source
+      target: '1755140216057'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          label: 입력 파일
+          max_length: 5
+          options: []
+          required: true
+          type: file-list
+          variable: input_file
+      height: 90
+      id: '1755140169985'
+      position:
+        x: 30
+        y: 247
+      positionAbsolute:
+        x: 30
+        y: 247
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 53e4f04e-8663-4589-918b-a3b5b374a0dc
+          role: system
+          text: '# 역할: PDF 문서 세그먼트화 전문가
+
+
+            # 데이터: {{#1755149580968.text#}}
+
+
+            # 지시사항:
+
+            *RAG 검색에 효율적인 텍스트를 생성해야 합니다.
+
+            *원본 문서를 수정하거나 요약하지 않고 그대로 추출해야 합니다.
+
+            *문단, 표, 섹션 등 2개 이상의 문장으로 이루어진 의미적 단위로 텍스트를 나누세요.
+
+            *다음과 같은 내용은 세그먼트로 생성하지 말고 무시하세요:
+
+            *빈 줄, 페이지 번호, 쪽갈이, 헤더, 푸터.
+
+            *단일 단어, 혹은 한 문장으로만 구성된 짧은 제목.
+
+            *각 세그먼트가 최소한의 의미적 완결성을 갖도록 관련 문장을 하나의 세그먼트로 묶으세요.
+
+            *각 세그먼트를 두 개의 줄바꿈(\n\n)으로 명확히 구분하세요.'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755140216057'
+      position:
+        x: 638
+        y: 247
+      positionAbsolute:
+        x: 638
+        y: 247
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1755140216057'
+          - text
+          value_type: string
+          variable: output
+        selected: false
+        title: 끝
+        type: end
+      height: 90
+      id: '1755145577192'
+      position:
+        x: 942
+        y: 247
+      positionAbsolute:
+        x: 942
+        y: 247
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: true
+        selected: false
+        title: Doc 추출기
+        type: document-extractor
+        variable_selector:
+        - '1755140169985'
+        - input_file
+      height: 94
+      id: '1755149580968'
+      position:
+        x: 334
+        y: 247
+      positionAbsolute:
+        x: 334
+        y: 247
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -330.7694919436517
+      y: 178.79258303802038
+      zoom: 0.923655537541026

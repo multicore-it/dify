@@ -1,0 +1,14 @@
+#자료출처
+*공공AI_서비스_실증_사례집.pdf: https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=99953&bcIdx=27985&parentSeq=27985
+*해외_AI_활용_사례_인벤토리.xlsx: https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=99953&bcIdx=27985&parentSeq=27985
+
+#전처리
+*gemini gem 활용
+*Azure AI Document Intelligence Studio: https://documentintelligence.ai.azure.com/
+
+
+#Azure
+Microsoft.CognitiveServices -> 등록(Register)
+
+#주요 설명내용
+메타데이터, 검색테스트, 로그정보

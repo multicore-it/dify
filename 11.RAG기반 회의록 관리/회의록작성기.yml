@@ -1,0 +1,456 @@
+app:
+  description: 회의록작성기
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 회의록작성기
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: stvlynn/doc:0.0.1@900d82963e63c505136dfc77f3e06329326e714ca66bed668224e811f73efc7b
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1752048215399-source-1752050868600-target
+      source: '1752048215399'
+      sourceHandle: source
+      target: '1752050868600'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1752050868600-source-1752050577691-target
+      source: '1752050868600'
+      sourceHandle: source
+      target: '1752050577691'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 1752050577691-source-1752051982336-target
+      source: '1752050577691'
+      sourceHandle: source
+      target: '1752051982336'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: end
+      id: 1752051982336-source-1752051576396-target
+      source: '1752051982336'
+      sourceHandle: source
+      target: '1752051576396'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables:
+        - label: 회의명
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: meet_name
+        - label: ' 회의일시'
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: meet_date
+        - label: 회의장소
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: meet_place
+        - label: 참석자
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: meet_member
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - audio
+          allowed_file_upload_methods:
+          - local_file
+          label: 회의녹음파일
+          max_length: 5
+          options: []
+          required: true
+          type: file-list
+          variable: meet_record
+      height: 194
+      id: '1752048215399'
+      position:
+        x: 85.14346387613062
+        y: 248.56748480515068
+      positionAbsolute:
+        x: 85.14346387613062
+        y: 248.56748480515068
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1752050868600'
+          - text
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 0baaaec1-0202-4667-b55b-1a35abf0395b
+          role: system
+          text: "#역할:\n당신은 제공된 회의 내용을 바탕으로 전문적인 회의록을 작성하는 비서입니다. \n회의록은 아래에 제시된 형식과\
+            \ 지침을 철저히 따라야 하며, 주어진 내용을 최대한 간결하고 명확하게 요약하여 작성해야 합니다.\n\n#회의 내용:\n{{#context#}}"
+        - id: c6dfb923-b686-4032-841d-ec5e2917ddf6
+          role: assistant
+          text: "#회의록 형식:\n## [회의록 제목]\n{{#1752048215399.meet_name#}} \n### 1. 회의\
+            \ 개요\n* 일시:{{#1752048215399.meet_date#}}\n* 장소:{{#1752048215399.meet_place#}}\n\
+            * 참석자:{{#1752048215399.meet_member#}}\n\n### 2. 주요 논의 내용 (핵심 요약)\n* [각\
+            \ 주요 안건별로 1~2문장으로 핵심 내용 요약]\n* [중요한 결정이나 합의사항 위주로 요약]\n* [논의 과정에서 제기된\
+            \ 주요 문제점이나 제안 사항 포함]\n\n### 3. 결정 및 합의 사항\n* [구체적인 결정 사항을 명확히 나열]\n* [합의된\
+            \ 내용에 대한 책임자 및 기한이 있다면 명시]\n\n### 4. 향후 조치 및 과제 (To-do List)\n* **[담당자]**:\
+            \ [수행할 과제 내용] (기한: [YYYY.MM.DD])\n* **[담당자]**: [수행할 과제 내용] (기한: [YYYY.MM.DD])\n\
+            \n### 5. 기타 특이사항\n* [논의 과정에서 발생한 특별한 사항이나 차후 논의가 필요한 부분]"
+        - id: 241bcb91-9199-421f-acc8-680c4f88e240
+          role: user
+          text: 회의내용과 회의록 형식에 알맞게 회의록 작성해주세요.
+        selected: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1752050577691'
+      position:
+        x: 676.433719567675
+        y: 248.56748480515068
+      positionAbsolute:
+        x: 676.433719567675
+        y: 248.56748480515068
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The audio file to be converted.
+            ja_JP: The audio file to be converted.
+            pt_BR: The audio file to be converted.
+            zh_Hans: 要转换的音频文件。
+          label:
+            en_US: Audio File
+            ja_JP: Audio File
+            pt_BR: Audio File
+            zh_Hans: 音频文件
+          llm_description: The audio file to be converted.
+          max: null
+          min: null
+          name: audio_file
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: file
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: All available ASR models. You can config model in the Model Provider
+              of Settings.
+            ja_JP: All available ASR models. You can config model in the Model Provider
+              of Settings.
+            pt_BR: All available ASR models. You can config model in the Model Provider
+              of Settings.
+            zh_Hans: 所有可用的 ASR 模型。你可以在设置中的模型供应商里配置。
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: Model
+          llm_description: null
+          max: null
+          min: null
+          name: model
+          options:
+          - icon: null
+            label:
+              en_US: distil-whisper-large-v3-en(langgenius/groq/groq)
+              ja_JP: distil-whisper-large-v3-en(langgenius/groq/groq)
+              pt_BR: distil-whisper-large-v3-en(langgenius/groq/groq)
+              zh_Hans: distil-whisper-large-v3-en(langgenius/groq/groq)
+            value: langgenius/groq/groq#distil-whisper-large-v3-en
+          - icon: null
+            label:
+              en_US: whisper-large-v3-turbo(langgenius/groq/groq)
+              ja_JP: whisper-large-v3-turbo(langgenius/groq/groq)
+              pt_BR: whisper-large-v3-turbo(langgenius/groq/groq)
+              zh_Hans: whisper-large-v3-turbo(langgenius/groq/groq)
+            value: langgenius/groq/groq#whisper-large-v3-turbo
+          - icon: null
+            label:
+              en_US: whisper-large-v3(langgenius/groq/groq)
+              ja_JP: whisper-large-v3(langgenius/groq/groq)
+              pt_BR: whisper-large-v3(langgenius/groq/groq)
+              zh_Hans: whisper-large-v3(langgenius/groq/groq)
+            value: langgenius/groq/groq#whisper-large-v3
+          - icon: null
+            label:
+              en_US: whisper-1(langgenius/openai/openai)
+              ja_JP: whisper-1(langgenius/openai/openai)
+              pt_BR: whisper-1(langgenius/openai/openai)
+              zh_Hans: whisper-1(langgenius/openai/openai)
+            value: langgenius/openai/openai#whisper-1
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        params:
+          audio_file: ''
+          model: ''
+        provider_id: audio
+        provider_name: audio
+        provider_type: builtin
+        selected: false
+        title: Speech To Text
+        tool_configurations:
+          model:
+            type: constant
+            value: langgenius/openai/openai#whisper-1
+        tool_description: Convert audio file to text.
+        tool_label: Speech To Text
+        tool_name: asr
+        tool_node_version: '2'
+        tool_parameters:
+          audio_file:
+            type: variable
+            value:
+            - '1752048215399'
+            - meet_record
+        type: tool
+      height: 90
+      id: '1752050868600'
+      position:
+        x: 371.2548629172549
+        y: 248.56748480515068
+      positionAbsolute:
+        x: 371.2548629172549
+        y: 248.56748480515068
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1752050577691'
+          - text
+          value_type: string
+          variable: text
+        - value_selector:
+          - '1752051982336'
+          - files
+          value_type: array[file]
+          variable: file
+        selected: false
+        title: 끝
+        type: end
+      height: 116
+      id: '1752051576396'
+      position:
+        x: 1243.638131726459
+        y: 248.56748480515068
+      positionAbsolute:
+        x: 1243.638131726459
+        y: 248.56748480515068
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The Markdown content to be converted to Word document
+            ja_JP: Word ドキュメントに変換する Markdown コンテンツ
+            pt_BR: O conteúdo Markdown a ser convertido para documento Word
+            zh_Hans: 要转换为Word文档的Markdown内容
+          label:
+            en_US: Markdown Content
+            ja_JP: Markdown コンテンツ
+            pt_BR: Conteúdo Markdown
+            zh_Hans: Markdown内容
+          llm_description: The Markdown content that will be converted to a Word document
+          max: null
+          min: null
+          name: markdown_content
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The title of the Word document
+            ja_JP: Word ドキュメントのタイトル
+            pt_BR: O título do documento Word
+            zh_Hans: Word文档的标题
+          label:
+            en_US: Document Title
+            ja_JP: ドキュメントタイトル
+            pt_BR: Título do Documento
+            zh_Hans: 文档标题
+          llm_description: The title that will be displayed at the top of the Word
+            document
+          max: null
+          min: null
+          name: title
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          markdown_content: ''
+          title: ''
+        provider_id: stvlynn/doc/doc
+        provider_name: stvlynn/doc/doc
+        provider_type: builtin
+        selected: false
+        title: Markdown to DOCX Converter
+        tool_configurations: {}
+        tool_description: Convert Markdown content to a DOCX (Word) document
+        tool_label: Markdown to DOCX Converter
+        tool_name: markdown_to_docx_converter
+        tool_node_version: '2'
+        tool_parameters:
+          markdown_content:
+            type: mixed
+            value: '{{#1752050577691.text#}}'
+          title:
+            type: mixed
+            value: '{{#1752048215399.meet_name#}}({{#1752048215399.meet_date#}})'
+        type: tool
+      height: 54
+      id: '1752051982336'
+      position:
+        x: 963.8854922823926
+        y: 248.56748480515068
+      positionAbsolute:
+        x: 963.8854922823926
+        y: 248.56748480515068
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -331.5516047234903
+      y: -109.23217752145081
+      zoom: 0.8977865923921577

@@ -1,0 +1,1055 @@
+app:
+  description: 제품판매 통계분석기
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 제품판매 통계분석기
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: jaguarliuu/rookie_text2data:1.0.1@283ae7f3c0991a6d64141308b5ff7a3db35c7c02daf46f7e3fd9f5b5826b8b17
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1751966561584-source-answer-target
+      source: '1751966561584'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1751957146520-source-1755418060715-target
+      source: '1751957146520'
+      sourceHandle: source
+      target: '1755418060715'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1755418060715-source-1751957620191-target
+      source: '1755418060715'
+      sourceHandle: source
+      target: '1751957620191'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 1751957620191-source-1755418240649-target
+      source: '1751957620191'
+      sourceHandle: source
+      target: '1755418240649'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1755418240649-source-1751966561584-target
+      source: '1755418240649'
+      sourceHandle: source
+      target: '1751966561584'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 시작
+        type: start
+        variables: []
+      height: 54
+      id: '1751957146520'
+      position:
+        x: 28.571428571428555
+        y: 258
+      positionAbsolute:
+        x: 28.571428571428555
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '
+
+          {{#1751966561584.text#}}'
+        desc: ''
+        selected: true
+        title: 답변
+        type: answer
+        variables: []
+      height: 104
+      id: answer
+      position:
+        x: 1550
+        y: 258
+      positionAbsolute:
+        x: 1550
+        y: 258
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 06873617-a346-4b4b-8875-017f51fb0487
+          role: system
+          text: "## 역할\n당신은 사용자의 질문을 PostgreSQL SQL 쿼리로 변환해주는 유능한 AI 데이터 분석가입니다.\n\
+            \n## 지시사항 \n- 아래에 제공되는 '데이터베이스 스키마'를 반드시 참고하여 '변경대상 쿼리'를 수정해야 합니다. \n\
+            - 스키마에 존재하지 않는 컬럼은 절대로 사용해서는 안 됩니다. \n- 응답은 다른 부가적인 설명 없이 오직 SQL 쿼리만 생성해야\
+            \ 합니다. \n- 테이블과 컬럼 이름에 한글이 포함되어 있으므로, \"큰따옴표\"로 감싸서 명확하게 지정해주세요.\n- 만일\
+            \ UNION과 같은 기능을 사용할 경우 모든 SQL 쿼리를 괄호로 감싸주세요.\n- 쿼리에 있는 한문은 모두 한글로 수정해주세요.\n\
+            - [매우 중요] 당신의 응답은 다른 어떤 부가적인 설명, 줄바꿈, Markdown 코드 블록(```)도 없이, 순수한 SQL\
+            \ 쿼리 텍스트만으로 구성되어야 합니다.\n\n## 변경대상 쿼리\n{{#1755418060715.text#}}\n\n## 데이터베이스\
+            \ 스키마\ncreate table public.제품별매출실적 (\n  그룹 text null,\n  제품명 text null,\n\
+              목표매출 double precision null,\n  실제매출 double precision null,\n  달성률 bigint\
+            \ null\n) TABLESPACE pg_default;\n\n## 생성할 SQL 쿼리:"
+        selected: false
+        title: LLM(database)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1751957620191'
+      position:
+        x: 638
+        y: 258
+      positionAbsolute:
+        x: 638
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1755418240649'
+          - text
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 1e42a54f-6ade-410c-a18a-bb1074bfb409
+          role: system
+          text: "#역할:\n당신은 유능한 데이터분석 전문가입니다.\n\n#컨텍스트:\n{{#context#}}\n\n#작업지시:\n\
+            1. 컨텍스트 내용중 {{#sys.query#}}에 적합한 내용만 추출합니다.\n2. 표에 대한 상세 분석:\n - 데이터의\
+            \ 주요 특징 및 경향: 표에 포함된 데이터의 전반적인 특징과 추세를 요약합니다.\n - 데이터 간의 관계 및 패턴: 특정 데이터\
+            \ 간에 존재하는 상관관계나 패턴을 파악하여 설명합니다.\n - 특이점 또는 중요한 통찰: 데이터에서 발견되는 예외적인 사항이나\
+            \ 중요한 의미를 지닌 점을 심층적으로 분석합니다.\n - 전체적인 요약 및 결론: 분석 결과를 종합하고 핵심적인 결론을 도출합니다.\n\
+            3. 모든 결과는 한글로 정리합니다.\n\n# 출력 형식:\n## [적절한 제목]\n## 매출 데이터\n[표 데이터] 항상 표\
+            \ 형식으로 출력해줘\n---\n## 매출 데이터 상세 분석\n### 데이터의 주요 특징 및 경향\n[분석 내용]\n### 데이터\
+            \ 간의 관계 및 패턴\n[분석 내용]\n### 특이점 또는 중요한 통찰\n[분석 내용]\n### 전체적인 요약 및 결론\n\
+            [분석 내용]\n"
+        selected: false
+        title: LLM(결과분석)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1751966561584'
+      position:
+        x: 1246
+        y: 258
+      positionAbsolute:
+        x: 1246
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database type
+            ja_JP: Database type
+            pt_BR: Database type
+            zh_Hans: 数据库类型
+          label:
+            en_US: Database type
+            ja_JP: Database type
+            pt_BR: Database type
+            zh_Hans: 数据库类型
+          llm_description: Database type
+          max: null
+          min: null
+          name: db_type
+          options:
+          - icon: ''
+            label:
+              en_US: MySQL
+              ja_JP: MySQL
+              pt_BR: MySQL
+              zh_Hans: MySQL
+            value: mysql
+          - icon: ''
+            label:
+              en_US: PostgreSQL
+              ja_JP: PostgreSQL
+              pt_BR: PostgreSQL
+              zh_Hans: PostgreSQL
+            value: postgresql
+          - icon: ''
+            label:
+              en_US: SQL Server
+              ja_JP: SQL Server
+              pt_BR: SQL Server
+              zh_Hans: SQL Server
+            value: sqlserver
+          - icon: ''
+            label:
+              en_US: Oracle
+              ja_JP: Oracle
+              pt_BR: Oracle
+              zh_Hans: Oracle
+            value: oracle
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: limit
+            ja_JP: limit
+            pt_BR: limit
+            zh_Hans: SQL返回数据量限制
+          label:
+            en_US: limit
+            ja_JP: limit
+            pt_BR: limit
+            zh_Hans: SQL返回数据量限制
+          llm_description: limit
+          max: 100000
+          min: 1
+          name: limit
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: json
+          form: llm
+          human_description:
+            en_US: result_format
+            ja_JP: result_format
+            pt_BR: result_format
+            zh_Hans: 返回数据格式
+          label:
+            en_US: result_format
+            ja_JP: result_format
+            pt_BR: result_format
+            zh_Hans: 返回数据格式
+          llm_description: result_format
+          max: null
+          min: null
+          name: result_format
+          options:
+          - icon: ''
+            label:
+              en_US: JSON
+              ja_JP: JSON
+              pt_BR: JSON
+              zh_Hans: JSON
+            value: json
+          - icon: ''
+            label:
+              en_US: TEXT
+              ja_JP: TEXT
+              pt_BR: TEXT
+              zh_Hans: TEXT
+            value: text
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database ip/host
+            ja_JP: Database ip/host
+            pt_BR: Database ip/host
+            zh_Hans: 数据库IP/域名
+          label:
+            en_US: Database ip/host
+            ja_JP: Database ip/host
+            pt_BR: Database ip/host
+            zh_Hans: 数据库IP/域名
+          llm_description: Database ip/host
+          max: null
+          min: null
+          name: host
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database port
+            ja_JP: Database port
+            pt_BR: Database port
+            zh_Hans: 数据库端口
+          label:
+            en_US: Database port
+            ja_JP: Database port
+            pt_BR: Database port
+            zh_Hans: 数据库端口
+          llm_description: Database port
+          max: 65535
+          min: 1
+          name: port
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database name
+            ja_JP: Database name
+            pt_BR: Database name
+            zh_Hans: 数据库名称
+          label:
+            en_US: Database name
+            ja_JP: Database name
+            pt_BR: Database name
+            zh_Hans: 数据库名称
+          llm_description: Database name
+          max: null
+          min: null
+          name: db_name
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: table_names
+            ja_JP: table_names
+            pt_BR: table_names
+            zh_Hans: 数据表名称
+          label:
+            en_US: table_names
+            ja_JP: table_names
+            pt_BR: table_names
+            zh_Hans: 数据表名称
+          llm_description: table_names
+          max: null
+          min: null
+          name: table_names
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Schema name
+            ja_JP: Schema name
+            pt_BR: Schema name
+            zh_Hans: 数据库Schema PGSQL用户选填，默认为public
+          label:
+            en_US: Schema name
+            ja_JP: Schema name
+            pt_BR: Schema name
+            zh_Hans: 数据库Schema PGSQL用户选填，默认为public
+          llm_description: Schema name
+          max: null
+          min: null
+          name: schema_name
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Username
+            ja_JP: Username
+            pt_BR: Username
+            zh_Hans: 用户名
+          label:
+            en_US: Username
+            ja_JP: Username
+            pt_BR: Username
+            zh_Hans: 用户名
+          llm_description: Username
+          max: null
+          min: null
+          name: username
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Password
+            ja_JP: Password
+            pt_BR: Password
+            zh_Hans: 密码
+          label:
+            en_US: Password
+            ja_JP: Password
+            pt_BR: Password
+            zh_Hans: 密码
+          llm_description: Password
+          max: null
+          min: null
+          name: password
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: secret-input
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: LLM model for text2data.
+            ja_JP: LLM model for text2data.
+            pt_BR: LLM model for text2data.
+            zh_Hans: LLM model for text2data.
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: 模型
+          llm_description: LLM model for text2data.
+          max: null
+          min: null
+          name: model
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: llm
+          template: null
+          type: model-selector
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Fetching data from the database using natural language.
+            ja_JP: Fetching data from the database using natural language.
+            pt_BR: Fetching data from the database using natural language.
+            zh_Hans: Fetching data from the database using natural language.
+          label:
+            en_US: Query string
+            ja_JP: Query string
+            pt_BR: Query string
+            zh_Hans: 查询语句
+          llm_description: Fetching data from the database using natural language.
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: custom_prompt
+            ja_JP: custom_prompt
+            pt_BR: custom_prompt
+            zh_Hans: 自定义提示
+          label:
+            en_US: custom_prompt
+            ja_JP: custom_prompt
+            pt_BR: custom_prompt
+            zh_Hans: 自定义提示
+          llm_description: custom_prompt
+          max: null
+          min: null
+          name: custom_prompt
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: with_comment
+            ja_JP: with_comment
+            pt_BR: with_comment
+            zh_Hans: 是否包含注释
+          label:
+            en_US: with_comment
+            ja_JP: with_comment
+            pt_BR: with_comment
+            zh_Hans: 是否包含注释
+          llm_description: with_comment
+          max: null
+          min: null
+          name: with_comment
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: boolean
+        params:
+          custom_prompt: ''
+          db_name: ''
+          db_type: ''
+          host: ''
+          limit: ''
+          model: ''
+          password: ''
+          port: ''
+          query: ''
+          result_format: ''
+          schema_name: ''
+          table_names: ''
+          username: ''
+          with_comment: ''
+        provider_id: jaguarliuu/rookie_text2data/rookie_text2data
+        provider_name: jaguarliuu/rookie_text2data/rookie_text2data
+        provider_type: builtin
+        selected: false
+        title: rookie_text2data
+        tool_configurations:
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+          with_comment:
+            type: constant
+            value: null
+        tool_description: Fetching data from the database using natural language.
+        tool_label: rookie_text2data
+        tool_name: rookie_text2data
+        tool_node_version: '2'
+        tool_parameters:
+          custom_prompt:
+            type: mixed
+            value: null
+          db_name:
+            type: mixed
+            value: postgres
+          db_type:
+            type: constant
+            value: postgresql
+          host:
+            type: mixed
+            value: aws-1-ap-southeast-1.pooler.supabase.com
+          limit:
+            type: constant
+            value: null
+          password:
+            type: mixed
+            value: tnQkqpdltm00#
+          port:
+            type: constant
+            value: 6543
+          query:
+            type: mixed
+            value: '{{#sys.query#}}'
+          result_format:
+            type: constant
+            value: text
+          schema_name:
+            type: mixed
+            value: null
+          table_names:
+            type: mixed
+            value: 제품별매출실적
+          username:
+            type: mixed
+            value: postgres.smtovtehrmlcnhiyppup
+        type: tool
+      height: 116
+      id: '1755418060715'
+      position:
+        x: 334
+        y: 258
+      positionAbsolute:
+        x: 334
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database type
+            ja_JP: Database type
+            pt_BR: Database type
+            zh_Hans: 数据库类型
+          label:
+            en_US: Database type
+            ja_JP: Database type
+            pt_BR: Database type
+            zh_Hans: 数据库类型
+          llm_description: Database type
+          max: null
+          min: null
+          name: db_type
+          options:
+          - icon: ''
+            label:
+              en_US: MySQL
+              ja_JP: MySQL
+              pt_BR: MySQL
+              zh_Hans: MySQL
+            value: mysql
+          - icon: ''
+            label:
+              en_US: PostgreSQL
+              ja_JP: PostgreSQL
+              pt_BR: PostgreSQL
+              zh_Hans: PostgreSQL
+            value: postgresql
+          - icon: ''
+            label:
+              en_US: SQL Server
+              ja_JP: SQL Server
+              pt_BR: SQL Server
+              zh_Hans: SQL Server
+            value: sqlserver
+          - icon: ''
+            label:
+              en_US: Oracle
+              ja_JP: Oracle
+              pt_BR: Oracle
+              zh_Hans: Oracle
+            value: oracle
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database ip/host
+            ja_JP: Database ip/host
+            pt_BR: Database ip/host
+            zh_Hans: 数据库IP/域名
+          label:
+            en_US: Database ip/host
+            ja_JP: Database ip/host
+            pt_BR: Database ip/host
+            zh_Hans: 数据库IP/域名
+          llm_description: Database ip/host
+          max: null
+          min: null
+          name: host
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database port
+            ja_JP: Database port
+            pt_BR: Database port
+            zh_Hans: 数据库端口
+          label:
+            en_US: Database port
+            ja_JP: Database port
+            pt_BR: Database port
+            zh_Hans: 数据库端口
+          llm_description: Database port
+          max: 65535
+          min: 1
+          name: port
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Database name
+            ja_JP: Database name
+            pt_BR: Database name
+            zh_Hans: 数据库名称
+          label:
+            en_US: Database name
+            ja_JP: Database name
+            pt_BR: Database name
+            zh_Hans: 数据库名称
+          llm_description: Database name
+          max: null
+          min: null
+          name: db_name
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Username
+            ja_JP: Username
+            pt_BR: Username
+            zh_Hans: 用户名
+          label:
+            en_US: Username
+            ja_JP: Username
+            pt_BR: Username
+            zh_Hans: 用户名
+          llm_description: Username
+          max: null
+          min: null
+          name: username
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Password
+            ja_JP: Password
+            pt_BR: Password
+            zh_Hans: 密码
+          label:
+            en_US: Password
+            ja_JP: Password
+            pt_BR: Password
+            zh_Hans: 密码
+          llm_description: Password
+          max: null
+          min: null
+          name: password
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: secret-input
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Schema name
+            ja_JP: Schema name
+            pt_BR: Schema name
+            zh_Hans: 数据库Schema PGSQL用户选填，默认为public
+          label:
+            en_US: Schema name
+            ja_JP: Schema name
+            pt_BR: Schema name
+            zh_Hans: 数据库Schema PGSQL用户选填，默认为public
+          llm_description: Schema name
+          max: null
+          min: null
+          name: schema
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Fetching data from the database using natural language.
+            ja_JP: Fetching data from the database using natural language.
+            pt_BR: Fetching data from the database using natural language.
+            zh_Hans: Fetching data from the database using natural language.
+          label:
+            en_US: SQL string
+            ja_JP: SQL string
+            pt_BR: SQL string
+            zh_Hans: 待执行的 SQL 语句
+          llm_description: Fetching data from the database using natural language.
+          max: null
+          min: null
+          name: sql
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: json
+          form: llm
+          human_description:
+            en_US: result_format
+            ja_JP: result_format
+            pt_BR: result_format
+            zh_Hans: 返回数据格式
+          label:
+            en_US: result_format
+            ja_JP: result_format
+            pt_BR: result_format
+            zh_Hans: 返回数据格式
+          llm_description: result_format
+          max: null
+          min: null
+          name: result_format
+          options:
+          - icon: ''
+            label:
+              en_US: JSON
+              ja_JP: JSON
+              pt_BR: JSON
+              zh_Hans: JSON
+            value: json
+          - icon: ''
+            label:
+              en_US: TEXT
+              ja_JP: TEXT
+              pt_BR: TEXT
+              zh_Hans: TEXT
+            value: text
+          - icon: ''
+            label:
+              en_US: CSV
+              ja_JP: CSV
+              pt_BR: CSV
+              zh_Hans: CSV
+            value: csv
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        params:
+          db_name: ''
+          db_type: ''
+          host: ''
+          password: ''
+          port: ''
+          result_format: ''
+          schema: ''
+          sql: ''
+          username: ''
+        provider_id: jaguarliuu/rookie_text2data/rookie_text2data
+        provider_name: jaguarliuu/rookie_text2data/rookie_text2data
+        provider_type: builtin
+        selected: false
+        title: rookie_excute_sql
+        tool_configurations: {}
+        tool_description: excute sql
+        tool_label: rookie_excute_sql
+        tool_name: rookie_excute_sql
+        tool_node_version: '2'
+        tool_parameters:
+          db_name:
+            type: mixed
+            value: postgres
+          db_type:
+            type: constant
+            value: postgresql
+          host:
+            type: mixed
+            value: aws-1-ap-southeast-1.pooler.supabase.com
+          password:
+            type: mixed
+            value: tnQkqpdltm00#
+          port:
+            type: constant
+            value: 6543
+          result_format:
+            type: constant
+            value: text
+          schema:
+            type: mixed
+            value: null
+          sql:
+            type: mixed
+            value: '{{#1751957620191.text#}}'
+          username:
+            type: mixed
+            value: postgres.smtovtehrmlcnhiyppup
+        type: tool
+      height: 54
+      id: '1755418240649'
+      position:
+        x: 942
+        y: 258
+      positionAbsolute:
+        x: 942
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 5.617288772264374
+      y: 102.42487294152784
+      zoom: 0.8040888484979247
